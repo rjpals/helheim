@@ -1,6 +1,8 @@
 'use strict';
 
-class Page extends React.Component {
+class Setting extends React.Component {}
+
+class Sidebar extends React.Component {
     constructor(props) {
         super(props)
         this.state = { open: true }
@@ -8,6 +10,16 @@ class Page extends React.Component {
     }
 
     render() {
+        const openButton = <button
+            onClick={() => this.setState({ open: !this.state.open })}
+            style={{
+                position: 'absolute',
+                left: this.state.open ? 300 : 0,
+                zIndex: 10000
+            }} >
+                { this.state.open ? "Close" : "Open"}
+            </button>
+
         if(this.state.open) {
             return <div
                 style={{
@@ -20,33 +32,16 @@ class Page extends React.Component {
                     backgroundColor: 'white',
                 }}
             >
-                <button
-                    onClick={() => this.setState({ open: false })}
-                    style={{position: 'absolute', left: 300}} 
-                >
-                    Close
-                </button>
+                {openButton}
                 <h1 style={{textAlign: "center"}}> Helheim </h1>
             </div>
         } else {
-            return (
-                <button
-                    onClick={() => this.setState({ open: true })}
-                    style={{
-                        zIndex: 10000,
-                        position: 'absolute',
-                        left: 0,
-                        top: 0,
-                    }}
-                >
-                    Open
-                </button>
-                );
+            return openButton;
         }
 
     }
 }
 
 const domContainer = document.querySelector('#react-container');
-ReactDOM.render(<Page/>,  domContainer);
+ReactDOM.render(<Sidebar/>,  domContainer);
 
