@@ -1,4 +1,7 @@
 'use strict';
+import React from 'react'
+import ReactDom from 'react-dom'
+import ReactSelect from 'react-select'
 
 class Setting extends React.Component {
     render() {
@@ -10,7 +13,7 @@ class Setting extends React.Component {
     }
 }
 
-class Sidebar extends React.Component {
+export default class Sidebar extends React.Component {
     constructor(props) {
         super(props)
         this.state = { open: true }
@@ -50,7 +53,3 @@ class Sidebar extends React.Component {
 
     }
 }
-
-const domContainer = document.querySelector('#react-container');
-ReactDOM.render(<Sidebar/>,  domContainer);
-

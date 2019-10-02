@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>-->
 	<script src="../libs/jquery/jquery-3.1.1.min.js"></script>
 	<script src="../libs/spectrum/spectrum.js"></script>
 	<script src="../libs/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
@@ -46,9 +46,7 @@
         <div id="potree_render_area"> </div>
     </div>
 
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-    <script type='text/babel' src="./sidebar.js"></script>
+    <script type="text/javascript" src="./dist/bundle.js"></script>
 	<script>
 		window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
 

@@ -142,7 +142,7 @@ window.movie.resources = times.map( time => ({
     name: time,
     timestamp: new Date(toIso(time)),
     //path: `https://s3.amazonaws.com/na.entwine.io/crrel/atlas/South_${time}/ept.json`,
-    path: `../helheim/South_${time}/ept.json`,
+    path: `../data/South_${time}/ept.json`,
     psid: PSIDs[`South_${time}`]
 }))
 
