@@ -11,6 +11,7 @@ const tickDisplayedPointCloud = () => {
             hiddenRange.forEach(pc => pc.visible = false)
 
             psid = window.movie.PSIDs[`South_${activeRange[0].name}`]
+            window.viewer.setDescription(toIso(activeRange[0].name))
             window.viewer.setFilterPointSourceIDRange(psid - 0.5, psid + 0.5)
         }
         window.movie.activePC++
