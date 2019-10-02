@@ -1,6 +1,14 @@
 'use strict';
 
-class Setting extends React.Component {}
+class Setting extends React.Component {
+    render() {
+        return <div>
+            <h1> {this.props.title} </h1>
+            <p> {this.props.desc} </p>
+
+        </div>
+    }
+}
 
 class Sidebar extends React.Component {
     constructor(props) {
@@ -34,6 +42,7 @@ class Sidebar extends React.Component {
             >
                 {openButton}
                 <h1 style={{textAlign: "center"}}> Helheim </h1>
+                <Setting title="Testing" desc="Explanation" />
             </div>
         } else {
             return openButton;
