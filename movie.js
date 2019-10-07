@@ -1,5 +1,12 @@
 window.movie.paused = true
 
+const fps = last => {
+    if(last === undefined) return fps(Potree.framenumber)
+    let f = Potree.framenumber
+    console.log(f - last)
+    setTimeout(() => fps(f),1000)
+}
+
 const tickDisplayedPointCloud = () => {
     if(!window.movie.paused) {
         const pcs = window.viewer.scene.pointclouds
