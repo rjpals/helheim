@@ -4,24 +4,7 @@ import ReactDom from 'react-dom'
 import ReactSelect from 'react-select'
 import 'rc-slider/assets/index.css'
 import Slider from 'rc-slider'
-import Tooltip from 'rc-tooltip'
-
 const { Handle } = Slider
-const handle = (props) => {
-  console.log("props:", props)
-  const { value, dragging, index, ...restProps } = props;
-  return (
-    <Tooltip
-      prefixCls="rc-slider-tooltip"
-      overlay={value}
-      visible={dragging}
-      placement="top"
-      key={index}
-    >
-      <Handle value={value} {...restProps} />
-    </Tooltip>
-  )
-}
 
 class Setting extends React.Component {
     render() {
@@ -30,13 +13,14 @@ class Setting extends React.Component {
             <h2> Memes </h2>
             <p> {this.props.desc} </p>
             <div>
+            <br/> <br/>
             <Slider
                 min={0}
-                max={100}
-                defaultValue={69}
+                max={10}
+                defaultValue={6}
                 step={1}
                 onChange={ (val)=> console.log("value:", val) }
-                handle={ handle }
+                handle={ props => <Handle {...props}/> }
             />
             </div>
 
