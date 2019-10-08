@@ -7,21 +7,30 @@ import Slider from 'rc-slider'
 const { Handle } = Slider
 
 class Setting extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {display: props.value || 5}
+    }
+
     render() {
-        return <div style={{ width:200, margin: 10 }}>
+        const display = this.state.display.toLocaleString()
+        return <div> 
             <h1> {this.props.title} </h1>
-            <h2> Memes </h2>
             <p> {this.props.desc} </p>
-            <div>
-            <br/> <br/>
-            <Slider
-                min={0}
-                max={10}
-                defaultValue={6}
-                step={1}
-                onChange={ (val)=> console.log("value:", val) }
-                handle={ props => <Handle {...props}/> }
-            />
+            <div style={{textAlign: 'center'}}>
+                { display }
+                <Slider
+                    min={this.props.min || 0}
+                    max={this.props.max || 10}
+                    defaultValue={this.state.display}
+                    step={this.props.step}
+                    onChange={ (val)=> {
+                        this.setState({display: val})
+                        this.props.onChange(val)
+                        }
+                    }
+                    handle={ props => <Handle {...props}/> }
+                />
             </div>
 
         </div>
@@ -47,6 +56,17 @@ export default class Sidebar extends React.Component {
                 { this.state.open ? "Close" : "Open"}
             </button>
 
+        const pauseButton = (paused) => (<button
+            onClick={ () => window.movie.paused = !window.movie.paused }
+            style={{
+                position: 'absolute',
+                left: 0,
+                zIndex: 10000
+            }} >
+                { "Play / Pause"}
+            </button>)
+
+
         if(this.state.open) {
             return <div
                 style={{
@@ -57,11 +77,41 @@ export default class Sidebar extends React.Component {
                     left: 0,
                     top: 0,
                     backgroundColor: 'white',
+                    paddingRight: 10,
+                    paddingLeft: 10,
                 }}
             >
                 {openButton}
                 <h1 style={{textAlign: "center"}}> Helheim </h1>
-                <Setting title="Testing" desc="Explanation" />
+                <Setting
+                    title="Scan speed"
+                    desc="Speed at which renderer advances to the next scan"
+                    min={0.2}
+                    max={10}
+                    step={0.1}
+                    value={1}
+                    onChange= {
+                        (val) => window.movie.speed = 1000 * val
+                    }
+                />
+                <Setting
+                    title="Point Budget"
+                    desc="Total number of points displayed"
+                    min={1e4}
+                    max={1e9}
+                    value={1e6}
+                    onChange= {(val) => window.viewer.setPointBudget(val)}
+                />
+                <Setting
+                    title="Look Ahead"
+                    desc="Number of scans to preload"
+                    min={1}
+                    max={10}
+                    value={6}
+                    onChange= {(val) => window.movie.preload = val}
+                />
+                <Setting title="Testing" desc="Explanation" value='5'/>
+                {pauseButton(window.movie.paused)}
             </div>
         } else {
             return openButton;
