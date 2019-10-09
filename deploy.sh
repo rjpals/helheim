@@ -6,6 +6,8 @@ BUCKET=potree-movie
 FILES=( dist/bundle.js dist/main.css index.html movie.js movieResources.js )
 LIBS=( libs build )
 
+npx webpack || exit 1
+
 for FILE in ${FILES[@]}; do
     aws s3 cp ./$FILE s3://$BUCKET/$FILE || exit 1
 done

@@ -43,26 +43,24 @@ export default class Sidebar extends React.Component {
         this.state = { open: true }
         window.reactPage = this
         this.width = props.width || 300
+        this.margin = props.margin || 10
     }
 
     render() {
         const openButton = <button
             onClick={() => this.setState({ open: !this.state.open })}
             style={{
-                position: 'absolute',
+                position: 'relative',
                 left: this.state.open ? this.width : 0,
-                zIndex: 10000
+                zIndex: 10000,
+                marginLeft: this.state.open? this.margin : 0,
             }} >
                 { this.state.open ? "Close" : "Open"}
             </button>
 
         const pauseButton = (paused) => (<button
             onClick={ () => window.movie.paused = !window.movie.paused }
-            style={{
-                position: 'absolute',
-                left: 0,
-                zIndex: 10000
-            }} >
+            >
                 { "Play / Pause"}
             </button>)
 
@@ -77,8 +75,8 @@ export default class Sidebar extends React.Component {
                     left: 0,
                     top: 0,
                     backgroundColor: 'white',
-                    paddingRight: 10,
-                    paddingLeft: 10,
+                    paddingRight: this.margin,
+                    paddingLeft: this.margin,
                 }}
             >
                 {openButton}
