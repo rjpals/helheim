@@ -3,10 +3,21 @@ echo Beginning deployment
 
 BUCKET=potree-movie
 
-aws s3 cp ./index.html s3://$BUCKET
-aws s3 cp ./movie.js s3://$BUCKET
-aws s3 cp ./movieResources.js s3://$BUCKET
+FILES=( dist/bundle.js dist/main.css index.html movie.js movieResources.js )
+LIBS=( libs build )
 
-aws s3 cp --recursive ./libs s3://$BUCKET/libs/
-aws s3 cp --recursive ./build s3://$BUCKET/build/
-aws s3 cp --recursive ./dist s3://$BUCKET/dist/
+for FILE in ${FILES[@]}; do
+    aws s3 cp ./$FILE s3://$BUCKET/$FILE || exit 1
+done
+
+for LIB in ${LIBS[@]}; do
+    list=$(aws s3 ls s3://$BUCKET/$LIB/)
+    if [ -z "$list" ]
+    then
+        aws s3 cp --recursive ./$LIB s3://$BUCKET/$LIB/ || exit 1
+    else
+        echo Library $LIB already exists, skipping...
+    fi
+done
+
+echo Deployment complete
