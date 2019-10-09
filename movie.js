@@ -1,10 +1,15 @@
 window.movie.paused = true
 
-const fps = last => {
-    if(last === undefined) return fps(Potree.framenumber)
+const fps = (lastFrame, lastTime) => {
+    //if(!(typeof lastFrame === 'number' && lastTime instanceof Date))
+    if(lastFrame === undefined || lastTime === undefined)
+        return fps(Potree.framenumber, new Date())
     let f = Potree.framenumber
-    console.log(f - last)
-    setTimeout(() => fps(f),1000)
+    let d = new Date()
+    let deltaF = f - lastFrame
+    let deltaT = d - lastTime
+    console.log({deltaF, deltaT, fps: 1000 * deltaF / deltaT})
+    setTimeout(() => fps(f, d), 1000)
 }
 
 const tickDisplayedPointCloud = () => {
