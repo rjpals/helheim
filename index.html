@@ -48,6 +48,17 @@
 
     <script type="text/javascript" src="./dist/bundle.js"></script>
 	<script>
+        const isWebGL2Available = function () {
+            try {
+                var canvas = document.createElement( 'canvas' )
+                return !! ( window.WebGL2RenderingContext && canvas.getContext( 'webgl2' ) )
+            } catch ( e ) {
+                return false
+            }
+        }
+
+        //potree requires WebGL 2.0
+        if(isWebGL2Available()) {
 		window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
 
 		viewer.setEDLEnabled(true);
@@ -65,6 +76,10 @@
         */
 
         glacierInit()
+        }
+        else {
+            document.getElementById('potree_container').innerHTML = "<h1> Please use a supported browser </h1>"
+        }
 
 		var getQueryParam = function(name) {
 			name = name.replace(/[\[\]]/g, "\\$&");
