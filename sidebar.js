@@ -9,23 +9,28 @@ const { Handle } = Slider
 class Setting extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {display: props.value || 5}
+        this.state = {displayVal: props.defaultValue}
+    }
+
+    componentDidMount() {
+        //this.props.onChange(this.props.defaultValue)
+        console.log('yeet')
     }
 
     render() {
-        const display = this.state.display.toLocaleString()
+        const display = this.state.displayVal.toLocaleString()
         return <div> 
             <h1> {this.props.title} </h1>
             <p> {this.props.desc} </p>
             <div style={{textAlign: 'center'}}>
                 { display }
                 <Slider
-                    min={this.props.min || 0}
-                    max={this.props.max || 10}
-                    defaultValue={this.state.display}
+                    min={this.props.min}
+                    max={this.props.max}
+                    defaultValue={this.props.defaultValue}
                     step={this.props.step}
                     onChange={ (val)=> {
-                        this.setState({display: val})
+                        this.setState({displayVal: val})
                         this.props.onChange(val)
                         }
                     }
@@ -37,13 +42,25 @@ class Setting extends React.Component {
     }
 }
 
+Setting.defaultProps = {
+    min: 0,
+    max: 10,
+    defaultValue: 5,
+    onChange: console.log,
+    title: "Insert title",
+    desc: "Insert description",
+}
+
 export default class Sidebar extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { open: true }
-        window.reactPage = this
-        this.width = props.width || 300
-        this.margin = props.margin || 10
+        this.state = { open: true, paused: false }
+    }
+
+    // TODO idk if this is correct, viewer might not be initialized by the time
+    // these components are rendered
+    componentDidRender() {
+        this.props.onChange(this.props.defaultValue)
     }
 
     render() {
@@ -51,18 +68,22 @@ export default class Sidebar extends React.Component {
             onClick={() => this.setState({ open: !this.state.open })}
             style={{
                 position: 'relative',
-                left: this.state.open ? this.width : 0,
+                left: this.state.open ? this.props.width : 0,
                 zIndex: 10000,
-                marginLeft: this.state.open? this.margin : 0,
+                marginLeft: this.state.open? this.props.margin : 0,
             }} >
                 { this.state.open ? "Close" : "Open"}
             </button>
 
-        const pauseButton = (paused) => (<button
-            onClick={ () => window.movie.paused = !window.movie.paused }
-            >
-                { "Play / Pause"}
-            </button>)
+        const pauseButton = <button
+            onClick={
+                () => {
+                    window.movie.paused = !window.movie.paused
+                    this.setState({ paused: !this.state.paused })
+                }
+            } >
+                { this.state.paused? "Play" : "Pause"}
+            </button>
 
 
         if(this.state.open) {
@@ -70,13 +91,13 @@ export default class Sidebar extends React.Component {
                 style={{
                     zIndex: 10000,
                     position: 'absolute',
-                    width: this.width,
+                    width: this.props.width,
                     height: '100%',
                     left: 0,
                     top: 0,
                     backgroundColor: 'white',
-                    paddingRight: this.margin,
-                    paddingLeft: this.margin,
+                    paddingRight: this.props.margin,
+                    paddingLeft: this.props.margin,
                 }}
             >
                 {openButton}
@@ -87,7 +108,7 @@ export default class Sidebar extends React.Component {
                     min={0.2}
                     max={10}
                     step={0.1}
-                    value={1}
+                    defaultValue={1}
                     onChange= {
                         (val) => window.movie.speed = 1000 * val
                     }
@@ -97,23 +118,24 @@ export default class Sidebar extends React.Component {
                     desc="Total number of points displayed"
                     min={1e4}
                     max={1e9}
-                    value={1e6}
+                    defaultValue={1e6}
                     onChange= {(val) => window.viewer.setPointBudget(val)}
                 />
                 <Setting
                     title="Look Ahead"
                     desc="Number of scans to preload"
-                    min={1}
-                    max={10}
-                    value={6}
-                    onChange= {(val) => window.movie.preload = val}
+                    onChange= {(val) => window.movie.preload = 1 + val}
                 />
-                <Setting title="Testing" desc="Explanation" value='5'/>
-                {pauseButton(window.movie.paused)}
+                <Setting/>
+                {pauseButton}
             </div>
         } else {
             return openButton;
         }
 
     }
+}
+Sidebar.defaultProps = {
+    width: 300,
+    margin: 10,
 }
