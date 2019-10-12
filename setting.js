@@ -19,7 +19,7 @@ export default class Setting extends React.Component {
     render() {
         const display = this.state.displayVal.toLocaleString()
         return <div>
-            <h1> {this.props.title} </h1>
+            <h3> {this.props.title} </h3>
             <p> {this.props.desc} </p>
             <div style={{textAlign: 'center'}}>
                 { display }
