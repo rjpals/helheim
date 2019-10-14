@@ -148,7 +148,7 @@ window.movie.resources = times.map( time => ({
 
 function toIso (t) {
     const s = (i) => t.slice(i,i+2)
-    return `20${s(0)}-${s(2)}-${s(4)}T${s(7)}:${s(9)}:${s(13)}Z`
+    return `20${s(0)}-${s(2)}-${s(4)}T${s(7)}:${s(9)}:${s(11)}Z`
     // ES 5 Implementation, incase you need to use Cesium's editor
     //return '20' + t.slice(0,2) + '-' + t.slice(2,4) + '-' + t.slice(4,6) + 'T' + t.slice(7,9) + ':' + t.slice(9,11) + ':' + t.slice(11,13) + 'Z'
 }

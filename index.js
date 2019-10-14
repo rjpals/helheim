@@ -4,6 +4,7 @@ import ReactDom from 'react-dom'
 import Sidebar from './sidebar'
 import Setting from './setting'
 import Dropdown from './dropdown'
+import Scan from './scan'
 
 class Movie extends React.Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class Movie extends React.Component {
         const sidebar = <Sidebar>
             <h1 style={{textAlign: "center"}}> Helheim </h1>
             {pauseButton}
-            <Dropdown title="Graphics settings" >
+            <Dropdown title="Graphics Settings" >
                 <Setting
                     title="Scan speed"
                     desc="Speed at which renderer advances to the next scan"
@@ -51,6 +52,17 @@ class Movie extends React.Component {
                     onChange= {(val) => window.movie.preload = 1 + val}
                 />
                 <Setting/>
+            </Dropdown>
+            <Dropdown title="Pointcloud Selection">
+                <h1> testing </h1>
+                <ul>
+                    {window.movie.resources.map( (scan) => (
+                        <Scan
+                            name={toIso(scan.name)}
+                            key={scan.name}
+                        />))
+                    }
+                </ul>
             </Dropdown>
         </Sidebar>
 

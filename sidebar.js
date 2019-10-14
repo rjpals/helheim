@@ -19,10 +19,9 @@ export default class Sidebar extends React.Component {
         const openButton = <button
             onClick={() => this.setState({ open: !this.state.open })}
             style={{
-                position: 'relative',
-                left: this.state.open ? this.props.width : 0,
-                zIndex: 10000,
-                marginLeft: this.state.open? this.props.margin : 0,
+                position: 'absolute',
+                left: 0,
+                zIndex: 10001,
             }} >
                 { this.state.open ? "Close" : "Open"}
             </button>
@@ -39,6 +38,7 @@ export default class Sidebar extends React.Component {
                     backgroundColor: 'white',
                     paddingRight: this.props.margin,
                     paddingLeft: this.props.margin,
+                    overflowY: 'auto',
                 }}
             >
                 {openButton}
