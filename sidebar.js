@@ -27,17 +27,6 @@ export default class Sidebar extends React.Component {
                 { this.state.open ? "Close" : "Open"}
             </button>
 
-        const pauseButton = <button
-            onClick={
-                () => {
-                    window.movie.paused = !window.movie.paused
-                    this.setState({ paused: !this.state.paused })
-                }
-            } >
-                { this.state.paused? "Play" : "Pause"}
-            </button>
-
-
         if(this.state.open) {
             return <div
                 style={{
@@ -54,7 +43,6 @@ export default class Sidebar extends React.Component {
             >
                 {openButton}
                 {this.props.children}
-                {pauseButton}
             </div>
         } else {
             return openButton;
