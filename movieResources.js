@@ -1,3 +1,4 @@
+/*
 const times = [
 //'180727_230155',
 //'180728_000155',
@@ -152,3 +153,4 @@ function toIso (t) {
     // ES 5 Implementation, incase you need to use Cesium's editor
     //return '20' + t.slice(0,2) + '-' + t.slice(2,4) + '-' + t.slice(4,6) + 'T' + t.slice(7,9) + ':' + t.slice(9,11) + ':' + t.slice(11,13) + 'Z'
 }
+*/

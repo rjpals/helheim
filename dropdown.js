@@ -2,7 +2,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import Sidebar from './sidebar'
-import Setting from './setting'
 
 export default class Dropdown extends React.Component {
     constructor(props) {

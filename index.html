@@ -48,6 +48,7 @@
 
     <script type="text/javascript" src="./dist/bundle.js"></script>
 	<script>
+        /*
         const isWebGL2Available = function () {
             try {
                 var canvas = document.createElement( 'canvas' )
@@ -56,8 +57,6 @@
                 return false
             }
         }
-
-        //potree requires WebGL 2.0
         if(isWebGL2Available()) {
 		window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
 
@@ -67,19 +66,8 @@
 		viewer.loadSettingsFromURL();
 
 		viewer.setDescription("Loading Entwine-generated EPT format");
-
-        /*
-		viewer.loadGUI(() => {
-			viewer.setLanguage('en');
-			$("#menu_appearance").next().show();
-		});
+        }
         */
-
-        glacierInit()
-        }
-        else {
-            document.getElementById('potree_container').innerHTML = "<h1> Please use a supported browser </h1>"
-        }
 
 		var getQueryParam = function(name) {
 			name = name.replace(/[\[\]]/g, "\\$&");

@@ -6,18 +6,8 @@ import Slider from 'rc-slider'
 const { Handle } = Slider
 
 export default class Setting extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {displayVal: props.defaultValue}
-    }
-
-    componentDidMount() {
-        //this.props.onChange(this.props.defaultValue)
-        console.log('yeet')
-    }
-
     render() {
-        const display = this.state.displayVal.toLocaleString()
+        const display = this.props.value.toLocaleString()
         return <div>
             <h3> {this.props.title} </h3>
             <p> {this.props.desc} </p>
@@ -26,13 +16,9 @@ export default class Setting extends React.Component {
                 <Slider
                     min={this.props.min}
                     max={this.props.max}
-                    defaultValue={this.props.defaultValue}
+                    value={this.props.value}
                     step={this.props.step}
-                    onChange={ (val)=> {
-                        this.setState({displayVal: val})
-                        this.props.onChange(val)
-                        }
-                    }
+                    onChange={ this.props.onChange }
                     handle={ props => <Handle {...props}/> }
                 />
             </div>
@@ -44,7 +30,6 @@ export default class Setting extends React.Component {
 Setting.defaultProps = {
     min: 0,
     max: 10,
-    defaultValue: 5,
     onChange: console.log,
     title: "Insert title",
     desc: "Insert description",
