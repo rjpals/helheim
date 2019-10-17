@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>Potree Viewer</title>
+
+	<link rel="stylesheet" type="text/css" href="./build/potree/potree.css">
+	<link rel="stylesheet" type="text/css" href="./libs/jquery-ui/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="./libs/perfect-scrollbar/css/perfect-scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="./libs/openlayers3/ol.css">
+	<link rel="stylesheet" type="text/css" href="./libs/spectrum/spectrum.css">
+	<link rel="stylesheet" type="text/css" href="./libs/jstree/themes/mixed/style.css">
+    <link rel="stylesheet" type="text/css" href="./libs/nouislider/nouislider.css">
+    <link rel="stylesheet" type="text/css" href="./dist/main.css">
+</head>
+
+<body>
+    <!-- <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>-->
+	<script src="./libs/jquery/jquery-3.1.1.min.js"></script>
+	<script src="./libs/spectrum/spectrum.js"></script>
+	<script src="./libs/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+	<script src="./libs/jquery-ui/jquery-ui.min.js"></script>
+	<script src="./libs/three.js/build/three.min.js"></script>
+	<script src="./libs/other/BinaryHeap.js"></script>
+	<script src="./libs/tween/tween.min.js"></script>
+	<script src="./libs/d3/d3.js"></script>
+	<script src="./libs/proj4/proj4.js"></script>
+	<script src="./libs/openlayers3/ol.js"></script>
+	<script src="./libs/i18next/i18next.js"></script>
+	<script src="./libs/jstree/jstree.js"></script>
+	<script src="./build/potree/potree.js"></script>
+	<script src="./libs/plasio/js/laslaz.js"></script>
+    <script src="./movieResources.js"></script>
+    <script src="./movie.js"></script>
+
+	<!-- INCLUDE ADDITIONAL DEPENDENCIES HERE -->
+	<!-- INCLUDE SETTINGS HERE -->
+
+    <div id="react-container"> </div>
+    <br>
+    <!-- <div class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; "> </div> -->
+    <div id="potree_container">
+        <div id="potree_render_area"> </div>
+    </div>
+
+    <script type="text/javascript" src="./dist/bundle.js"></script>
+	<script>
+        const isWebGL2Available = function () {
+            try {
+                var canvas = document.createElement( 'canvas' )
+                return !! ( window.WebGL2RenderingContext && canvas.getContext( 'webgl2' ) )
+            } catch ( e ) {
+                return false
+            }
+        }
+
+        //potree requires WebGL 2.0
+        if(isWebGL2Available()) {
+		window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
+
+		viewer.setEDLEnabled(true);
+		viewer.setFOV(60);
+		viewer.setPointBudget(1000*1000);
+		viewer.loadSettingsFromURL();
+
+		viewer.setDescription("Loading Entwine-generated EPT format");
+
+        /*
+		viewer.loadGUI(() => {
+			viewer.setLanguage('en');
+			$("#menu_appearance").next().show();
+		});
+        */
+
+        glacierInit()
+        }
+        else {
+            document.getElementById('potree_container').innerHTML = "<h1> Please use a supported browser </h1>"
+        }
+
+		var getQueryParam = function(name) {
+			name = name.replace(/[\[\]]/g, "\\$&");
+			var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+				results = regex.exec(window.location.href);
+			if (!results || !results[2]) return null;
+			return decodeURIComponent(results[2].replace(/\+/g, " "));
+		}
+
+	</script>
+  </body>
+</html>
+
