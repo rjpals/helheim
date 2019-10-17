@@ -57,7 +57,24 @@ class Movie extends React.Component {
         })
     }
 
-    dumpState() { console.log(this.state) }
+    dumpState() {
+        const config = JSON.parse(JSON.stringify(this.props.config))
+        const v = config.viewer
+        config.resources.forEach((res, index) => {
+             res.enabled = this.state.enabledPCs[index]
+        })
+
+        config.viewer.pointBudget = this.state.pointBudget
+
+        const cam = this.viewer.scene.getActiveCamera()
+        const pos = cam.getWorldPosition()
+        config.viewer.view.position = [pos.x, pos.y, pos.z]
+
+        const dir = this.viewer.scene.view.getPivot()
+        config.viewer.view.lookAt = [dir.x, dir.y, dir.z]
+
+        console.log(config)
+        }
 
     initViewer() {
         const viewer = this.viewer
@@ -150,6 +167,10 @@ class Movie extends React.Component {
     }
 
     render() {
+        const exportButton = <button onClick={ this.dumpState.bind(this) } >
+                Export
+            </button>
+
         const pauseButton = <button onClick={ this.togglePause.bind(this) } >
                 { this.state.paused? "Play" : "Pause"}
             </button>
@@ -157,6 +178,7 @@ class Movie extends React.Component {
         const sidebar = <Sidebar>
             <h1 style={{textAlign: "center"}}> Helheim </h1>
             {pauseButton}
+            {exportButton}
             <Dropdown title="Graphics Settings" >
                 <Setting
                     title="Scan speed"
