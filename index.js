@@ -11,37 +11,8 @@ import Scan from './scan'
 import Config from './config'
 import Utils from './utils'
 
-const validate = () => true //TODO
-
-
-const tickDisplayedPointCloud = () => {
-    if(!window.movie.paused) {
-        const pcs = window.viewer.scene.pointclouds
-        const {preload, activePC} = window.movie
-        if(pcs.length > 0) {
-            const activeRange = circularSlice(pcs, activePC, activePC + preload)
-            const hiddenRange = circularSlice(pcs, activePC + preload, activePC)
-            activeRange.forEach(pc => pc.visible = true)
-            hiddenRange.forEach(pc => pc.visible = false)
-
-            const psid = window.movie.PSIDs[`South_${activeRange[0].name}`]
-            window.viewer.setDescription(Utils.toIso(activeRange[0].name))
-            window.viewer.setFilterPointSourceIDRange(psid - 0.5, psid + 0.5)
-        }
-        window.movie.activePC++
-    }
-    setTimeout( () => tickDisplayedPointCloud(), window.movie.speed)
-}
-
-const circularSlice = (arr, start, end) => {
-    start = start % arr.length
-    end = end % arr.length
-    if(start > end) {
-        return [...arr.slice(start), ...arr.slice(0, end)]
-    } else {
-        return arr.slice(start, end)
-    }
-}
+//TODO
+const validate = (config) => typeof config === typeof {}
 
 class Movie extends React.Component {
     constructor(props) {
@@ -57,7 +28,8 @@ class Movie extends React.Component {
             activePC: 0,
             speed: 1,
             pointBudget,
-            preload: 6, 
+            preload: 5,
+            visiblePCs,
             enabledPCs,
             interval,
         }
@@ -122,11 +94,12 @@ class Movie extends React.Component {
         const visiblePCIndices = this.getVisiblePCs()
         const allPCs = this.viewer.scene.pointclouds
         const visiblePCs = allPCs.map( x => false )
+        allPCs.forEach( pc => { pc.visible = false } )
         visiblePCIndices.forEach( i => {
             visiblePCs[i] = true
-            allPCs.visible = true
+            allPCs[i].visible = true
         })
-        this.setState(visiblePCs)
+        this.setState({visiblePCs})
     }
 
     getVisiblePCs() {
@@ -135,7 +108,7 @@ class Movie extends React.Component {
         const arr = [activePC]
         if(enabledPCs[activePC]) {
             let ptr = activePC
-            while(arr.length < this.state.preload) {
+            while(arr.length < (this.state.preload + 1) ) {
                 ptr = (ptr + 1) % enabledPCs.length
                 if(ptr === activePC) break
                 if(enabledPCs[ptr]) { arr.push(ptr) }
@@ -162,7 +135,6 @@ class Movie extends React.Component {
     }
 
     changeLookAhead(n) {
-        //window.movie.preload = 1 + n
         this.setState({preload: n}) 
     }
 
@@ -217,6 +189,7 @@ class Movie extends React.Component {
                             name={Utils.toIso(scan.name)}
                             key={scan.name}
                             enabled={this.state.enabledPCs[index]}
+                            visible={this.state.visiblePCs[index]}
                             active={this.state.activePC===index}
                             handleClick={
                                 () => this.toggleEnabledScan.bind(this)(index)
@@ -251,7 +224,8 @@ const badBrowserPage = <>
 
 if(Utils.isWebGL2Available()) {
     const potreeContainer = document.getElementById("potree_render_area")
-    const viewer = new Potree.Viewer(potreeContainer)
+    const viewer = new Potree.Viewer(potreeContainer, {useDefaultRenderLoop: true})
+    window.viewer = viewer
     const movie = <Movie config={Config} viewer={viewer}/>
     ReactDom.render(movie,  domContainer)
 } else { 
