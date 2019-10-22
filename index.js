@@ -8,7 +8,7 @@ import Sidebar from './sidebar'
 import Setting from './setting'
 import Dropdown from './dropdown'
 import Scan from './scan'
-import Config from './config'
+import Config from './config2'
 import Utils from './utils'
 
 //TODO
@@ -100,7 +100,7 @@ class Movie extends React.Component {
             this.setState({ activePC })
             const psid = this.props.config.resources[activePC].psid
             // window.viewer.setDescription(Utils.toIso(activeRange[0].name))
-            this.viewer.setFilterPointSourceIDRange(psid - 0.5, psid + 0.5)
+            this.viewer.setFilterPointSourceIDRange(psid - 0.5, psid + 15.5)
             this.viewer.scene.pointclouds[activePC].visible = true
         }
         this.updateVisiblePCs()
@@ -248,6 +248,8 @@ if(Utils.isWebGL2Available()) {
     const potreeContainer = document.getElementById("potree_render_area")
     const viewer = new Potree.Viewer(potreeContainer, {useDefaultRenderLoop: true})
     window.viewer = viewer
+    window.fps = Utils.fps
+    window.animationHack = Utils.animationHack
     const movie = <Movie config={Config} viewer={viewer}/>
     ReactDom.render(movie,  domContainer)
 } else { 

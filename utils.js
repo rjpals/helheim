@@ -22,7 +22,6 @@ function toIso (t) {
     const s = (i) => t.slice(i,i+2)
     return `20${s(0)}-${s(2)}-${s(4)}T${s(7)}:${s(9)}:${s(11)}Z`
 }
-
 const getQueryParam = function(name) {
     name = name.replace(/[\[\]]/g, "\\$&");
     const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
@@ -31,4 +30,13 @@ const getQueryParam = function(name) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-export default {fps, isWebGL2Available, toIso, getQueryParam}
+const animationHack = () => {
+    const animationHackInterval = window.setInterval(() => {
+        const range = window.viewer.filterPointSourceIDRange.map(x => x+1); 
+        window.viewer.setFilterPointSourceIDRange(...range);
+    }, 1000/9)
+    window.animationHackInterval = animationHackInterval
+    return animationHackInterval
+}
+
+export default {fps, isWebGL2Available, toIso, getQueryParam, animationHack}
