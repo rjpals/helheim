@@ -40,7 +40,9 @@ class Movie extends React.Component {
     async loadPointcloudsFromConfig() {
         const config = this.props.config
         const resources = config.resources
-        const loadPC = ({ name, path }) => {
+        const prefix = config.resourceMeta.prefix
+        const loadPC = ({ name }) => {
+            const path = `${prefix}${name}/ept.json`
             return new Promise(
                 (resolve) => Potree.loadPointCloud(path, name, resolve)
             )
@@ -99,7 +101,6 @@ class Movie extends React.Component {
             } while (!this.state.enabledPCs[activePC])
             this.setState({ activePC })
             const psid = this.props.config.resources[activePC].psid
-            // window.viewer.setDescription(Utils.toIso(activeRange[0].name))
             this.viewer.setFilterPointSourceIDRange(psid - 0.5, psid + 0.5)
             this.viewer.scene.pointclouds[activePC].visible = true
         }
