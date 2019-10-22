@@ -23,4 +23,12 @@ function toIso (t) {
     return `20${s(0)}-${s(2)}-${s(4)}T${s(7)}:${s(9)}:${s(11)}Z`
 }
 
-export default {fps, isWebGL2Available, toIso}
+const getQueryParam = function(name) {
+    name = name.replace(/[\[\]]/g, "\\$&");
+    const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(window.location.href);
+    if (!results || !results[2]) return null;
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+export default {fps, isWebGL2Available, toIso, getQueryParam}
