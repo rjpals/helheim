@@ -27,7 +27,8 @@
         ]
     },
     "resourceMeta": {
-        "prefix": "./data/South_"
+        "devPrefix": "./data/South_",
+        "prodPrefix": "https://potree-movie.s3.amazonaws.com/data/South_"
     },
     "resources": [ 
         {

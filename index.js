@@ -40,7 +40,7 @@ class Movie extends React.Component {
     async loadPointcloudsFromConfig() {
         const config = this.props.config
         const resources = config.resources
-        const prefix = config.resourceMeta.prefix
+        const prefix = config.resourceMeta.prodPrefix
         const loadPC = ({ name }) => {
             const path = `${prefix}${name}/ept.json`
             return new Promise(

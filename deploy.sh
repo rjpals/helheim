@@ -3,7 +3,7 @@ echo Beginning deployment
 
 BUCKET=potree-movie
 
-FILES=( dist/bundle.js dist/main.css index.html movie.js movieResources.js )
+FILES=( dist/bundle.js dist/main.css index.html )
 LIBS=( libs build )
 
 npx webpack || exit 1
