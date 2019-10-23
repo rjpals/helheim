@@ -8,7 +8,7 @@ import Sidebar from './sidebar'
 import Setting from './setting'
 import Dropdown from './dropdown'
 import Scan from './scan'
-import Config from './config'
+import DefaultConfig from './config'
 import Utils from './utils'
 
 //TODO
@@ -57,6 +57,27 @@ class Movie extends React.Component {
             }
             this.viewer.scene.addPointCloud(pc)
         })
+    }
+
+    share() {
+        const pos = this.viewer.scene.getActiveCamera().getWorldPosition()
+        const dir = this.viewer.scene.view.getPivot()
+        const obj = {
+            /*
+            posX: pos.x,
+            posY: pos.y,
+            posZ: pos.z,
+            dirX: dir.x,
+            dirY: dir.y,
+            dirZ: dir.z,
+            */
+        }
+        this.props.config.resources.forEach( (res, index) => {
+            obj[res.name] = this.state.enabledPCs[index]
+        })
+        console.log(obj)
+        const encode = (o) => Object.keys(o).map( k => `${k}=${o[k]}`).join('&')
+        console.log(`${window.location.origin}/?${encode(obj)}`)
     }
 
     dumpState() {
@@ -176,10 +197,15 @@ class Movie extends React.Component {
                 { this.state.paused? "Play" : "Pause"}
             </button>
 
+        const shareButton = <button onClick={ this.share.bind(this) } >
+                Share
+            </button>
+
         const sidebar = <Sidebar>
             <h1 style={{textAlign: "center"}}> Helheim </h1>
             {pauseButton}
             {exportButton}
+            {shareButton}
             <Dropdown title="Graphics Settings" >
                 <Setting
                     title="Scan speed"
@@ -249,7 +275,8 @@ if(Utils.isWebGL2Available()) {
     const potreeContainer = document.getElementById("potree_render_area")
     const viewer = new Potree.Viewer(potreeContainer, {useDefaultRenderLoop: true})
     window.viewer = viewer
-    const movie = <Movie config={Config} viewer={viewer}/>
+
+    const movie = <Movie config={Utils.applyUrlChanges(DefaultConfig)} viewer={viewer}/>
     ReactDom.render(movie,  domContainer)
 } else { 
     ReactDom.render(badBrowserPage,  domContainer)

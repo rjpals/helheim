@@ -31,4 +31,42 @@ const getQueryParam = function(name) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-export default {fps, isWebGL2Available, toIso, getQueryParam}
+const applyUrlChanges = (config) => {
+    config = JSON.parse(JSON.stringify(config))
+        config.resources = config.resources.map( r => {
+        let enabled = JSON.parse(getQueryParam(r.name))
+        if(enabled != null) {
+            r.enabled = enabled
+        }
+        return r
+    })
+
+    const v = config.viewer.view
+
+    const posX = getQueryParam('posX')
+    if(posX != null)
+        v.position[0] = posX
+
+    const posY = getQueryParam('posY')
+    if(posY != null)
+        v.position[1] = posY
+
+    const posZ = getQueryParam('posZ')
+    if(posZ != null)
+        v.position[2] = posZ
+
+    const dirX = getQueryParam('dirX')
+    if(dirX != null)
+        v.lookAt[0] = dirX
+
+    const dirY = getQueryParam('dirY')
+    if(dirY != null)
+        v.lookAt[1] = dirY
+
+    const dirZ = getQueryParam('dirZ')
+    if(dirZ != null)
+        v.lookAt[2] = dirZ
+    return config
+}
+
+export default {fps, isWebGL2Available, toIso, getQueryParam, applyUrlChanges}
