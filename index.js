@@ -40,7 +40,7 @@ class Movie extends React.Component {
     async loadPointcloudsFromConfig() {
         const config = this.props.config
         const resources = config.resources
-        const prefix = config.resourceMeta.prodPrefix
+        const prefix = config.resourceMeta.devPrefix
         const loadPC = ({ name }) => {
             const path = `${prefix}${name}/ept.json`
             return new Promise(
@@ -61,7 +61,7 @@ class Movie extends React.Component {
 
     share() {
         const dir = this.viewer.scene.view.getPivot()
-        const pos = this.viewer.scene.getActiveCamera().getWorldPosition(dir)
+        const pos = this.viewer.scene.getActiveCamera().getWorldPosition(pos)
         const obj = {
             posX: pos.x,
             posY: pos.y,

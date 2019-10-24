@@ -43,27 +43,27 @@ const applyUrlChanges = (config) => {
 
     const v = config.viewer.view
 
-    const posX = getQueryParam('posX')
+    const posX = JSON.parse(getQueryParam('posX'))
     if(posX != null)
         v.position[0] = posX
 
-    const posY = getQueryParam('posY')
+    const posY = JSON.parse(getQueryParam('posY'))
     if(posY != null)
         v.position[1] = posY
 
-    const posZ = getQueryParam('posZ')
+    const posZ = JSON.parse(getQueryParam('posZ'))
     if(posZ != null)
         v.position[2] = posZ
 
-    const dirX = getQueryParam('dirX')
+    const dirX = JSON.parse(getQueryParam('dirX'))
     if(dirX != null)
         v.lookAt[0] = dirX
 
-    const dirY = getQueryParam('dirY')
+    const dirY = JSON.parse(getQueryParam('dirY'))
     if(dirY != null)
         v.lookAt[1] = dirY
 
-    const dirZ = getQueryParam('dirZ')
+    const dirZ = JSON.parse(getQueryParam('dirZ'))
     if(dirZ != null)
         v.lookAt[2] = dirZ
     return config
