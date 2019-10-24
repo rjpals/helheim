@@ -60,17 +60,15 @@ class Movie extends React.Component {
     }
 
     share() {
-        const pos = this.viewer.scene.getActiveCamera().getWorldPosition()
         const dir = this.viewer.scene.view.getPivot()
+        const pos = this.viewer.scene.getActiveCamera().getWorldPosition(dir)
         const obj = {
-            /*
             posX: pos.x,
             posY: pos.y,
             posZ: pos.z,
             dirX: dir.x,
             dirY: dir.y,
             dirZ: dir.z,
-            */
         }
         this.props.config.resources.forEach( (res, index) => {
             obj[res.name] = this.state.enabledPCs[index]
