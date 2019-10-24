@@ -40,7 +40,10 @@ class Movie extends React.Component {
     async loadPointcloudsFromConfig() {
         const config = this.props.config
         const resources = config.resources
-        const prefix = config.resourceMeta.devPrefix
+        const prefix = window.location.hostname === 'localhost' ?
+            config.resourceMeta.devPrefix :
+            config.resourceMeta.prodPrefix
+
         const loadPC = ({ name }) => {
             const path = `${prefix}${name}/ept.json`
             return new Promise(
@@ -74,7 +77,8 @@ class Movie extends React.Component {
             obj[res.name] = this.state.enabledPCs[index]
         })
         const encode = (o) => Object.keys(o).map( k => `${k}=${o[k]}`).join('&')
-        const link = `${window.location.origin}/?${encode(obj)}`
+        const l = window.location
+        const link = `${l.origin}${l.pathname}?${encode(obj)}`
         navigator.clipboard.writeText(link)
 
         //debugging
