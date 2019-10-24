@@ -75,9 +75,13 @@ class Movie extends React.Component {
         this.props.config.resources.forEach( (res, index) => {
             obj[res.name] = this.state.enabledPCs[index]
         })
-        console.log(obj)
         const encode = (o) => Object.keys(o).map( k => `${k}=${o[k]}`).join('&')
-        console.log(`${window.location.origin}/?${encode(obj)}`)
+        const link = `${window.location.origin}/?${encode(obj)}`
+        navigator.clipboard.writeText(link)
+
+        //debugging
+        console.log(obj)
+        console.log(link)
     }
 
     dumpState() {
