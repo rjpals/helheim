@@ -20,9 +20,9 @@ class Movie extends React.Component {
         const config = props.config
         const enabledPCs = config.resources.map(res => res.enabled)
         const visiblePCs = config.resources.map(res => false)
-        const interval = setInterval(this.advancePC.bind(this), 1000)
         const pointBudget = config.viewer.pointBudget
         this.viewer = props.viewer
+
         this.state = {
             paused: false,
             activePC: 0,
@@ -31,9 +31,8 @@ class Movie extends React.Component {
             preload: 5,
             visiblePCs,
             enabledPCs,
-            interval,
+            interval: null,
         }
-        this.loadPointcloudsFromConfig()
         this.initViewer()
     }
 
@@ -105,7 +104,7 @@ class Movie extends React.Component {
         console.log(config)
         }
 
-    initViewer() {
+    async initViewer() {
         const viewer = this.viewer
         const scene = viewer.scene
         const config = this.props.config
@@ -118,6 +117,10 @@ class Movie extends React.Component {
         viewer.setPointBudget(this.props.config.viewer.pointBudget)
         scene.view.position.set(...position)
         scene.view.lookAt(new THREE.Vector3(...lookAt));
+        await this.loadPointcloudsFromConfig()
+
+        const interval = setInterval(this.tick.bind(this),  this.state.speed *  1000)
+        this.setState({interval})
     }
 
     advancePC() {
@@ -147,6 +150,12 @@ class Movie extends React.Component {
         this.setState({visiblePCs})
     }
 
+    tick() {
+        this.advancePC()
+        this.updateVisiblePCs()
+        //console.log(this.viewer.filterPointSourceIDRange)
+    }
+
     getVisiblePCs() {
         const enabledPCs = this.state.enabledPCs
         const activePC = this.state.activePC
@@ -167,9 +176,11 @@ class Movie extends React.Component {
     } 
 
     changeSpeed(speed) {
-        clearInterval(this.state.interval)
-        const interval = setInterval(this.advancePC.bind(this), 1000 * speed)
-        this.setState({speed, interval}) 
+        this.setState((prevState, props) => {
+        clearInterval(prevState.interval)
+        const interval = setInterval(this.tick.bind(this), 1000 * speed)
+        return {...prevState, speed, interval}
+        })
         console.log(`Speed changed to ${speed}`)
     }
 
