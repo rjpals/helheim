@@ -66,6 +66,7 @@ const applyUrlChanges = (config) => {
     const dirZ = JSON.parse(getQueryParam('dirZ'))
     if(dirZ != null)
         v.lookAt[2] = dirZ
+
     return config
 }
 
