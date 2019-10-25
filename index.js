@@ -78,7 +78,11 @@ class Movie extends React.Component {
         const encode = (o) => Object.keys(o).map( k => `${k}=${o[k]}`).join('&')
         const l = window.location
         const link = `${l.origin}${l.pathname}?${encode(obj)}`
-        navigator.clipboard.writeText(link)
+        try {
+            navigator.clipboard.writeText(link)
+        } catch (e) {
+            console.log(new Error("Can't copy to clipboard: is TLS working? Are you using a supported browser?"))
+        }
 
         //debugging
         console.log(obj)
