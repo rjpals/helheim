@@ -123,35 +123,51 @@ class Movie extends React.Component {
         scene.view.lookAt(new THREE.Vector3(...lookAt));
         await this.loadPointcloudsFromConfig()
 
-        const interval = setInterval(this.tick.bind(this),  this.state.speed *  1000)
-        this.setState({interval})
+        this.setState( (state, props) => {
+            const f = this.tick.bind(this)
+            const ms = this.state.speed * 1000
+            const interval = setInterval(f, ms)
+            return {interval}
+        })
     }
 
     advancePC() {
-        if(!this.state.paused) {
-            let activePC = this.state.activePC
-            do {
-                activePC = (activePC + 1) % this.props.config.resources.length
-            } while (!this.state.enabledPCs[activePC])
-            this.setState({ activePC })
-            const psid = this.props.config.resources[activePC].psid
-            this.viewer.setFilterPointSourceIDRange(psid - 0.5, psid + 0.5)
-            this.viewer.scene.pointclouds[activePC].visible = true
-        }
-        this.updateVisiblePCs()
-        //console.log("visible pointclouds:", this.getVisiblePCs())
+        this.setState((state, props) => {
+            if(!state.paused) {
+                let activePC = state.activePC
+                //find next enabled PC
+                do {
+                    activePC++
+                    if(activePC >= this.props.config.resources.length)
+                        activePC = 0
+                } while (!state.enabledPCs[activePC])
+                //set PSId filter to ensure PC is visible
+                const psid = this.props.config.resources[activePC].psid
+                this.viewer.setFilterPointSourceIDRange(psid - 0.5, psid + 0.5)
+                this.viewer.scene.pointclouds[activePC].visible = true
+                //debug
+                const range = this.viewer.filterPointSourceIDRange
+                const activeName = props.config.resources[activePC].name
+                console.log({range, psid, activeName})
+
+                //update state
+                return {activePC}
+            }
+            return {}
+        })
     }
 
     updateVisiblePCs() {
-        const visiblePCIndices = this.getVisiblePCs()
-        const allPCs = this.viewer.scene.pointclouds
-        const visiblePCs = allPCs.map( x => false )
-        allPCs.forEach( pc => { pc.visible = false } )
-        visiblePCIndices.forEach( i => {
-            visiblePCs[i] = true
-            allPCs[i].visible = true
+        this.setState((state, props) => {
+            const visiblePCIndices = new Set(this.getVisiblePCs(state))
+            const allPCs = this.viewer.scene.pointclouds
+            const numPCs = allPCs.length
+            const visiblePCs = allPCs.map( pc => null)
+            allPCs.forEach( (pc, i) => {
+                visiblePCs[i] = pc.visible = visiblePCIndices.has(i)
+            })
+            return {visiblePCs}
         })
-        this.setState({visiblePCs})
     }
 
     tick() {
@@ -160,30 +176,32 @@ class Movie extends React.Component {
         //console.log(this.viewer.filterPointSourceIDRange)
     }
 
-    getVisiblePCs() {
-        const enabledPCs = this.state.enabledPCs
-        const activePC = this.state.activePC
+    getVisiblePCs(state) {
+        const enabledPCs = state.enabledPCs
+        const activePC = state.activePC
         const arr = [activePC]
         if(enabledPCs[activePC]) {
             let ptr = activePC
-            while(arr.length < (this.state.preload + 1) ) {
+            while(arr.length < (state.preload + 1) ) {
                 ptr = (ptr + 1) % enabledPCs.length
                 if(ptr === activePC) break
                 if(enabledPCs[ptr]) { arr.push(ptr) }
             }
             return arr
-        } else { throw new Error() }
+        } else { throw new Error("The active pointcloud is not enabled") }
     }
 
     togglePause() {
-        this.setState({ paused: !this.state.paused })
+        this.setState((state, props) => {
+            return {paused: !state.paused }
+        })
     } 
 
     changeSpeed(speed) {
-        this.setState((prevState, props) => {
-        clearInterval(prevState.interval)
-        const interval = setInterval(this.tick.bind(this), 1000 * speed)
-        return {...prevState, speed, interval}
+        this.setState((state, props) => {
+            clearInterval(state.interval)
+            const interval = setInterval(this.tick.bind(this), 1000 * speed)
+            return {speed, interval}
         })
         console.log(`Speed changed to ${speed}`)
     }
