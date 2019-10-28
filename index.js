@@ -33,7 +33,10 @@ class Movie extends React.Component {
             enabledPCs,
             interval: null,
         }
-        this.initViewer()
+    }
+    
+    async componentDidMount() {
+        await this.initViewer()
     }
 
     async loadPointcloudsFromConfig() {
@@ -52,6 +55,7 @@ class Movie extends React.Component {
         const pcPromises = resources.map(loadPC)
 
         const events = await Promise.all(pcPromises)
+        events.forEach( e => console.log(e))
         const pointclouds = events.map( (e) => e.pointcloud)
         pointclouds.forEach( (pc) => {
             for(let key in config.material) {
@@ -122,8 +126,18 @@ class Movie extends React.Component {
         scene.view.position.set(...position)
         scene.view.lookAt(new THREE.Vector3(...lookAt));
         await this.loadPointcloudsFromConfig()
+        //this.advancePC() 
 
         this.setState( (state, props) => {
+            const activePC = state.activePC
+            const psid = this.props.config.resources[activePC].psid
+            this.viewer.setFilterPointSourceIDRange(psid - 0.5, psid + 0.5)
+            this.viewer.scene.pointclouds[activePC].visible = true
+            //debug
+            const range = this.viewer.filterPointSourceIDRange
+            const activeName = props.config.resources[activePC].name
+            console.log({range, psid, activeName})
+
             const f = this.tick.bind(this)
             const ms = this.state.speed * 1000
             const interval = setInterval(f, ms)
@@ -314,7 +328,16 @@ if(Utils.isWebGL2Available()) {
     const viewer = new Potree.Viewer(potreeContainer, {useDefaultRenderLoop: true})
     window.viewer = viewer
 
+    const interval = window.setInterval( () => {
+        const range = window.viewer.filterPointSourceIDRange
+        console.log(range)
+    },10)
+
+    setTimeout( () => clearInterval(interval), 4000)
+
+
     const movie = <Movie config={Utils.applyUrlChanges(DefaultConfig)} viewer={viewer}/>
+    //setTimeout( ()=> ReactDom.render(movie,  domContainer), 1500)
     ReactDom.render(movie,  domContainer)
 } else { 
     ReactDom.render(badBrowserPage,  domContainer)
