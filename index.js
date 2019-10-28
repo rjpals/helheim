@@ -133,27 +133,24 @@ class Movie extends React.Component {
 
     advancePC() {
         this.setState((state, props) => {
-            if(!state.paused) {
-                let activePC = state.activePC
-                //find next enabled PC
-                do {
-                    activePC++
-                    if(activePC >= this.props.config.resources.length)
-                        activePC = 0
-                } while (!state.enabledPCs[activePC])
-                //set PSId filter to ensure PC is visible
-                const psid = this.props.config.resources[activePC].psid
-                this.viewer.setFilterPointSourceIDRange(psid - 0.5, psid + 0.5)
-                this.viewer.scene.pointclouds[activePC].visible = true
-                //debug
-                const range = this.viewer.filterPointSourceIDRange
-                const activeName = props.config.resources[activePC].name
-                console.log({range, psid, activeName})
+            let activePC = state.activePC
+            //find next enabled PC
+            do {
+                activePC++
+                if(activePC >= this.props.config.resources.length)
+                    activePC = 0
+            } while (!state.enabledPCs[activePC])
+            //set PSId filter to ensure PC is visible
+            const psid = this.props.config.resources[activePC].psid
+            this.viewer.setFilterPointSourceIDRange(psid - 0.5, psid + 0.5)
+            this.viewer.scene.pointclouds[activePC].visible = true
+            //debug
+            const range = this.viewer.filterPointSourceIDRange
+            const activeName = props.config.resources[activePC].name
+            console.log({range, psid, activeName})
 
-                //update state
-                return {activePC}
-            }
-            return {}
+            //update state
+            return {activePC}
         })
     }
 
@@ -171,8 +168,10 @@ class Movie extends React.Component {
     }
 
     tick() {
-        this.advancePC()
-        this.updateVisiblePCs()
+        if(!this.state.paused) {
+            this.advancePC()
+            this.updateVisiblePCs()
+        }
         //console.log(this.viewer.filterPointSourceIDRange)
     }
 
