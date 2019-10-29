@@ -33,7 +33,10 @@ class Movie extends React.Component {
             enabledPCs,
             interval: null,
         }
-        this.initViewer()
+    }
+
+    async componentDidMount() {
+        await this.initViewer()
     }
 
     async loadPointcloudsFromConfig() {
@@ -260,13 +263,21 @@ class Movie extends React.Component {
                     min={1e4}
                     max={1e7}
                     value={this.state.pointBudget}
-                    onChange= {this.changePointBudget.bind(this)}
+                    onChange={this.changePointBudget.bind(this)}
                 />
                 <Setting
                     title="Look Ahead"
                     desc="Number of scans to preload"
                     value={this.state.preload}
                     onChange= {this.changeLookAhead.bind(this)}
+                />
+                <Setting
+                    title="Displayed Scan"
+                    desc="Index of the scan that you want to look at"
+                    min={0}
+                    max={this.props.config.resources.length}
+                    value={this.state.activePC}
+                    onChange={(activePC) => this.setState({activePC})}
                 />
             </Dropdown>
             <Dropdown title="Pointcloud Selection">
