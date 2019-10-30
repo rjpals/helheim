@@ -271,17 +271,9 @@ class Movie extends React.Component {
                     value={this.state.preload}
                     onChange= {this.changeLookAhead.bind(this)}
                 />
-                <Setting
-                    title="Displayed Scan"
-                    desc="Index of the scan that you want to look at"
-                    min={0}
-                    max={this.props.config.resources.length}
-                    value={this.state.activePC}
-                    onChange={(activePC) => this.setState({activePC})}
-                />
             </Dropdown>
             <Dropdown title="Pointcloud Selection">
-                <ul>
+                <div>
                     { this.props.config.resources.map( (scan, index) => (
                         <Scan
                             name={Utils.toIso(scan.name)}
@@ -289,12 +281,15 @@ class Movie extends React.Component {
                             enabled={this.state.enabledPCs[index]}
                             visible={this.state.visiblePCs[index]}
                             active={this.state.activePC===index}
-                            handleClick={
+                            handleCheck={
                                 () => this.toggleEnabledScan.bind(this)(index)
+                            }
+                            handleClick={
+                                () => this.setState({activePC: index})
                             }
                         />))
                     }
-                </ul>
+                </div>
             </Dropdown>
         </Sidebar>
 
