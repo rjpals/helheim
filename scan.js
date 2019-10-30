@@ -2,8 +2,13 @@ import React from 'react'
 
 export default class Scan extends React.Component {
     render() {
+        const Color = {
+            lightRed: "#ffcccb",
+            lightGrey: "#cccccc",
+        }
+
         let display = this.props.name
-        const style = this.props.enabled? {} : {backgroundColor: "#ffcccb"}
+        const style = this.props.enabled? {} : {backgroundColor: Color.lightGrey}
 
         if(this.props.visible) {
             display = <mark> {display} </mark>
