@@ -135,14 +135,18 @@ class Movie extends React.Component {
     }
 
     advancePC() {
+        let activePC = this.state.activePC
+        //find next enabled PC
+        do {
+            activePC++
+            if(activePC >= this.props.config.resources.length)
+                activePC = 0
+        } while (!this.state.enabledPCs[activePC])
+        this.setActivePC(activePC)
+    }
+
+    setActivePC(activePC) {
         this.setState((state, props) => {
-            let activePC = state.activePC
-            //find next enabled PC
-            do {
-                activePC++
-                if(activePC >= this.props.config.resources.length)
-                    activePC = 0
-            } while (!state.enabledPCs[activePC])
             //set PSId filter to ensure PC is visible
             const psid = this.props.config.resources[activePC].psid
             this.viewer.setFilterPointSourceIDRange(psid - 0.5, psid + 0.5)
@@ -156,6 +160,7 @@ class Movie extends React.Component {
             return {activePC}
         })
     }
+
 
     updateVisiblePCs() {
         this.setState((state, props) => {
@@ -284,8 +289,10 @@ class Movie extends React.Component {
                             handleCheck={
                                 () => this.toggleEnabledScan.bind(this)(index)
                             }
-                            handleClick={
-                                () => this.setState({activePC: index})
+                            handleClick={ () => {
+                                this.setActivePC.bind(this)(index)
+                                this.updateVisiblePCs()
+                                }
                             }
                         />))
                     }
