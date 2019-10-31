@@ -62,6 +62,18 @@ class Movie extends React.Component {
             }
             this.viewer.scene.addPointCloud(pc)
         })
+        { // VOLUME visible
+            let volume  = new Potree.BoxVolume();
+            volume.name = "Test_01";
+            volume.scale.set(10000, 10000, 10000);
+            volume.position.set(...this.props.config.viewer.view.lookAt);
+            volume.clip = true;
+            //volume.visible = false;
+
+            this.viewer.scene.addVolume(volume);
+        }
+
+        viewer.setClipTask(Potree.ClipTask.SHOW_INSIDE)
     }
 
     share() {
