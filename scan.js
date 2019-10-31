@@ -17,6 +17,9 @@ export default class Scan extends React.Component {
         if(this.props.active) {
             display = <strong> {display} </strong>
         }
+        if(this.props.enabled) {
+            display = <span onClick={this.props.handleClick}> {display} </span>
+        }
         const input = this.props.enabled?
             <input type="checkbox" onClick={this.props.handleCheck} checked /> :
             <input type="checkbox" onClick={this.props.handleCheck} />
@@ -24,9 +27,7 @@ export default class Scan extends React.Component {
         return <>
             <div style={style} >
                 {input}
-                <span onClick={this.props.handleClick}>
-                    {display}
-                </span>
+                {display}
             </div>
         </>
     }
