@@ -32,6 +32,7 @@ class Movie extends React.Component {
             visiblePCs,
             enabledPCs,
             interval: null,
+            clipTask: Potree.ClipTask.HIGHLIGHT,
         }
     }
 
@@ -62,18 +63,6 @@ class Movie extends React.Component {
             }
             this.viewer.scene.addPointCloud(pc)
         })
-        { // VOLUME visible
-            let volume  = new Potree.BoxVolume();
-            volume.name = "Test_01";
-            volume.scale.set(10000, 10000, 10000);
-            volume.position.set(...this.props.config.viewer.view.lookAt);
-            volume.clip = true;
-            //volume.visible = false;
-
-            this.viewer.scene.addVolume(volume);
-        }
-
-        viewer.setClipTask(Potree.ClipTask.SHOW_INSIDE)
     }
 
     share() {
@@ -136,6 +125,7 @@ class Movie extends React.Component {
         viewer.setPointBudget(this.props.config.viewer.pointBudget)
         scene.view.position.set(...position)
         scene.view.lookAt(new THREE.Vector3(...lookAt));
+        viewer.setClipTask(this.state.clipTask)
         await this.loadPointcloudsFromConfig()
 
         this.setState( (state, props) => {
@@ -259,11 +249,50 @@ class Movie extends React.Component {
                 Share
             </button>
 
+        const handleClipTaskChange = (event) => {
+            console.log(event)
+            const val = event.target.value
+            console.log(val)
+            this.setState({ clipTask: val })
+            viewer.setClipTask(val)
+        }
+
         const sidebar = <Sidebar>
             <h1 style={{textAlign: "center"}}> Helheim </h1>
             {pauseButton}
             {exportButton}
             {shareButton}
+            <Dropdown title="Tools">
+                <form>
+                    <label>
+                    <input type="radio"
+                        value={Potree.ClipTask.SHOW_INSIDE}
+                        checked={Potree.ClipTask.SHOW_INSIDE==this.state.clipTask}
+                        onChange={handleClipTaskChange}
+                    />
+                    Show Inside
+                    </label>
+                    <br/>
+                    <label>
+                    <input type="radio"
+                        value={Potree.ClipTask.SHOW_OUTSIDE}
+                        checked={Potree.ClipTask.SHOW_OUTSIDE==this.state.clipTask}
+                        onChange={handleClipTaskChange}
+                    />
+                    Show Outside
+                    </label>
+                    <br/>
+                    <label>
+                    <input type="radio"
+                        value={Potree.ClipTask.HIGHLIGHT}
+                        checked={Potree.ClipTask.HIGHLIGHT==this.state.clipTask}
+                        onChange={handleClipTaskChange}
+                    />
+                    Highlight
+                    </label>
+                    <br/>
+                </form>
+            </Dropdown>
             <Dropdown title="Graphics Settings" >
                 <Setting
                     title="Scan speed"
