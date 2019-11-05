@@ -32,7 +32,8 @@ class Movie extends React.Component {
             visiblePCs,
             enabledPCs,
             interval: null,
-            clipTask: Potree.ClipTask.HIGHLIGHT,
+            clipTask: null,
+            hasBox: false,
         }
     }
 
@@ -236,6 +237,31 @@ class Movie extends React.Component {
         console.log(`Resoure #${index}, named "${name}", has been ${status}`)
     }
 
+    async beginVolumeSelection() {
+        if (this.volume) throw new Error('Volume selection already exists')
+        this.volume = new Potree.VolumeTool(this.viewer).startInsertion({
+            clip: true
+        })
+
+        //await this.update({ volumeHovering: true })
+
+        // needs to start at highlight so we can still see PC while placing the box
+        const clipTask = Potree.ClipTask.HIGHLIGHT
+        viewer.setClipTask(clipTask)
+        this.viewer.inputHandler.toggleSelection(this.volume)
+
+        this.setState({ hasBox: true, clipTask })
+    }
+
+    async removeVolume() {
+        this.viewer.scene.addEventListener('volume_removed', () => {
+            this.volume = null
+            this.viewer.scene.removeEventListener('volume_removed')
+            this.setState({ hasBox: false, clipTask: null })
+        })
+        this.viewer.scene.removeVolume(this.volume)
+    }
+
     render() {
         const exportButton = <button onClick={ this.dumpState.bind(this) } >
                 Export
@@ -257,40 +283,37 @@ class Movie extends React.Component {
             viewer.setClipTask(val)
         }
 
+        const addCubeButton = <button
+            onClick={ this.beginVolumeSelection.bind(this) }>
+            Place box
+            </button>
+
+        const delCubeButton = <button
+            onClick={ this.removeVolume.bind(this) }>
+            Delete box
+            </button>
+
+        const clipTaskRadioButton = (task, label) => <label>
+            <input type="radio"
+                value={task}
+                checked={task==this.state.clipTask}
+                onChange={handleClipTaskChange}
+            />
+            {label}
+            <br/>
+            </label>
+
         const sidebar = <Sidebar>
             <h1 style={{textAlign: "center"}}> Helheim </h1>
             {pauseButton}
             {exportButton}
             {shareButton}
             <Dropdown title="Tools">
+                {this.state.hasBox? delCubeButton : addCubeButton}
                 <form>
-                    <label>
-                    <input type="radio"
-                        value={Potree.ClipTask.SHOW_INSIDE}
-                        checked={Potree.ClipTask.SHOW_INSIDE==this.state.clipTask}
-                        onChange={handleClipTaskChange}
-                    />
-                    Show Inside
-                    </label>
-                    <br/>
-                    <label>
-                    <input type="radio"
-                        value={Potree.ClipTask.SHOW_OUTSIDE}
-                        checked={Potree.ClipTask.SHOW_OUTSIDE==this.state.clipTask}
-                        onChange={handleClipTaskChange}
-                    />
-                    Show Outside
-                    </label>
-                    <br/>
-                    <label>
-                    <input type="radio"
-                        value={Potree.ClipTask.HIGHLIGHT}
-                        checked={Potree.ClipTask.HIGHLIGHT==this.state.clipTask}
-                        onChange={handleClipTaskChange}
-                    />
-                    Highlight
-                    </label>
-                    <br/>
+                    {clipTaskRadioButton(Potree.ClipTask.SHOW_INSIDE, "Show inside")}
+                    {clipTaskRadioButton(Potree.ClipTask.SHOW_OUTSIDE, "Show outside")}
+                    {clipTaskRadioButton(Potree.ClipTask.HIGHLIGHT, "Highlight")}
                 </form>
             </Dropdown>
             <Dropdown title="Graphics Settings" >
