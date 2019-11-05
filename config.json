@@ -3,7 +3,8 @@
 
     },
     "viewer":{
-        "pointBudget":1e7,
+        "pointBudget":1e6,
+        "background" : "white",
         "view":{
             "position":[
                 -4234485.586,

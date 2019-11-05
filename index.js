@@ -22,6 +22,15 @@ class Movie extends React.Component {
         const visiblePCs = config.resources.map(res => false)
         const pointBudget = config.viewer.pointBudget
         this.viewer = props.viewer
+        this.viewer.setBackground(config.viewer.background)
+
+        this.getPath = (resource) => {
+            const prefix = window.location.hostname === 'localhost' ?
+                props.config.resourceMeta.devPrefix :
+                props.config.resourceMeta.prodPrefix
+            return `${prefix}${resource.name}/ept.json`
+        }
+
 
         this.state = {
             paused: false,
@@ -44,12 +53,9 @@ class Movie extends React.Component {
     async loadPointcloudsFromConfig() {
         const config = this.props.config
         const resources = config.resources
-        const prefix = window.location.hostname === 'localhost' ?
-            config.resourceMeta.devPrefix :
-            config.resourceMeta.prodPrefix
 
-        const loadPC = ({ name }) => {
-            const path = `${prefix}${name}/ept.json`
+        const loadPC = (resource) => {
+            const path = this.getPath(resource)
             return new Promise(
                 (resolve) => Potree.loadPointCloud(path, name, resolve)
             )
@@ -343,6 +349,14 @@ class Movie extends React.Component {
             </Dropdown>
             <Dropdown title="Pointcloud Selection">
                 <div>
+                    <h3> Current Pointcloud </h3>
+                    <p>
+                        {(new Date(Utils.toIso(this.props.config.resources[this.state.activePC].name))).toString()}
+                    </p>
+                    <a href={this.getPath(this.props.config.resources[this.state.activePC])}>
+                    <strong> EPT endpoint link </strong>
+                    </a>
+                    <h3> Pointclouds </h3>
                     { this.props.config.resources.map( (scan, index) => (
                         <Scan
                             name={Utils.toIso(scan.name)}
