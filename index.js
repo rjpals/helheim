@@ -5,7 +5,7 @@ import "@babel/polyfill";
 import React from 'react'
 import ReactDom from 'react-dom'
 import Sidebar from './sidebar'
-import Setting from './setting'
+import { Setting, LogSetting } from './setting'
 import Dropdown from './dropdown'
 import Scan from './scan'
 import DefaultConfig from './config'
@@ -323,7 +323,7 @@ class Movie extends React.Component {
                 </form>
             </Dropdown>
             <Dropdown title="Graphics Settings" >
-                <Setting
+                <LogSetting
                     title="Scan speed"
                     desc="Speed at which renderer advances to the next scan"
                     min={0.1}
@@ -332,10 +332,10 @@ class Movie extends React.Component {
                     value={this.state.speed}
                     onChange= {this.changeSpeed.bind(this)}
                 />
-                <Setting
+                <LogSetting
                     title="Point Budget"
                     desc="Total number of points displayed"
-                    min={1e4}
+                    min={1e5}
                     max={1e7}
                     value={this.state.pointBudget}
                     onChange={this.changePointBudget.bind(this)}
