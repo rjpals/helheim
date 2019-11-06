@@ -308,6 +308,8 @@ class Movie extends React.Component {
             {label}
             <br/>
             </label>
+        const eptLink = this.getPath(this.props.config.resources[this.state.activePC])
+        const potreeLink = `http://potree.entwine.io/data/view.html?r="${eptLink}"`
 
         const sidebar = <Sidebar>
             <h1 style={{textAlign: "center"}}> Helheim </h1>
@@ -353,9 +355,8 @@ class Movie extends React.Component {
                     <p>
                         {(new Date(Utils.toIso(this.props.config.resources[this.state.activePC].name))).toString()}
                     </p>
-                    <a href={this.getPath(this.props.config.resources[this.state.activePC])}>
-                    <strong> EPT endpoint link </strong>
-                    </a>
+                    <a href={eptLink}> <strong> EPT endpoint link </strong> </a>
+                    <a href={potreeLink}> View this pointcloud in Potree </a>
                     <h3> Pointclouds </h3>
                     { this.props.config.resources.map( (scan, index) => (
                         <Scan
