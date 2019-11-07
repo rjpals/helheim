@@ -5,7 +5,7 @@ BUCKET=potree-movie
 
 GITHUBPAGESFOLDER=~/hobu/helheim.lidar.io/
 
-FILES=( movie/dist/bundle.js movie/dist/main.css movie/index.html )
+FILES=( movie/dist/bundle.js movie/dist/main.css movie/index.html index.html favicon* glacier.png )
 LIBS=( movie/libs movie/build )
 
 (cd movie && npx webpack) || exit 1
