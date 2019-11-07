@@ -4,11 +4,11 @@ import "@babel/polyfill";
 
 import React from 'react'
 import ReactDom from 'react-dom'
-import Sidebar from './sidebar'
-import { Setting, LogSetting } from './setting'
-import Dropdown from './dropdown'
-import Scan from './scan'
-import DefaultConfig from './2018-north-config'
+import Sidebar from './components/sidebar'
+import { Setting, LogSetting } from './components/setting'
+import Dropdown from './components/dropdown'
+import Scan from './components/scan'
+import DefaultConfig from './configs/2018-north'
 import Utils from './utils'
 
 //TODO
