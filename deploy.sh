@@ -3,12 +3,12 @@ echo Beginning deployment
 
 BUCKET=potree-movie
 
-GITHUBPAGESFOLDER=~/hobu/helheim.lidar.io/movie/
+GITHUBPAGESFOLDER=~/hobu/helheim.lidar.io/
 
-FILES=( dist/bundle.js dist/main.css index.html )
-LIBS=( libs build )
+FILES=( movie/dist/bundle.js movie/dist/main.css movie/index.html )
+LIBS=( movie/libs movie/build )
 
-npx webpack || exit 1
+(cd movie && npx webpack) || exit 1
 
 for FILE in ${FILES[@]}; do
     aws s3 cp ./$FILE s3://$BUCKET/$FILE || exit 1 
