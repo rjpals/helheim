@@ -8,7 +8,7 @@ import Sidebar from './sidebar'
 import { Setting, LogSetting } from './setting'
 import Dropdown from './dropdown'
 import Scan from './scan'
-import DefaultConfig from './config'
+import DefaultConfig from './2018-north-config'
 import Utils from './utils'
 
 //TODO
@@ -56,6 +56,7 @@ class Movie extends React.Component {
 
         const loadPC = (resource) => {
             const path = this.getPath(resource)
+            const name = resource.name
             return new Promise(
                 (resolve) => Potree.loadPointCloud(path, name, resolve)
             )
@@ -161,9 +162,9 @@ class Movie extends React.Component {
             this.viewer.setFilterPointSourceIDRange(psid - 0.5, psid + 0.5)
             this.viewer.scene.pointclouds[activePC].visible = true
             //debug
-            const range = this.viewer.filterPointSourceIDRange
-            const activeName = props.config.resources[activePC].name
-            console.log({range, psid, activeName})
+            //const range = this.viewer.filterPointSourceIDRange
+            //const activeName = props.config.resources[activePC].name
+            //console.log({range, psid, activeName})
 
             //update state
             return {activePC}
@@ -185,11 +186,11 @@ class Movie extends React.Component {
     }
 
     tick() {
+        viewer.setFilterGPSTimeRange(-Infinity, Infinity)
         if(!this.state.paused) {
             this.advancePC()
             this.updateVisiblePCs()
         }
-        //console.log(this.viewer.filterPointSourceIDRange)
     }
 
     getVisiblePCs(state) {
@@ -282,9 +283,7 @@ class Movie extends React.Component {
             </button>
 
         const handleClipTaskChange = (event) => {
-            console.log(event)
             const val = event.target.value
-            console.log(val)
             this.setState({ clipTask: val })
             viewer.setClipTask(val)
         }
