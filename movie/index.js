@@ -40,6 +40,7 @@ class Movie extends React.Component {
             preload: 5,
             visiblePCs,
             enabledPCs,
+            elevationRange: config.material.elevationRange,
             interval: null,
             clipTask: null,
             hasBox: false,
@@ -233,6 +234,13 @@ class Movie extends React.Component {
         this.setState({preload: n}) 
     }
 
+    changeElevationRange(elevationRange) {
+        this.viewer.scene.pointclouds.forEach( pc => {
+            pc.material.elevationRange = elevationRange
+        })
+        this.setState({elevationRange})
+    }
+
     toggleEnabledScan(index) {
         const copy = this.state.enabledPCs.slice()
         copy[index] = !copy[index] 
@@ -340,6 +348,14 @@ class Movie extends React.Component {
                     max={1e7}
                     value={this.state.pointBudget}
                     onChange={this.changePointBudget.bind(this)}
+                />
+                <Setting
+                    title="Elevation range slider"
+                    desc="Coloring of points based on elevation"
+                    min={-100}
+                    max={300}
+                    value={this.state.elevationRange}
+                    onChange= { this.changeElevationRange.bind(this) }
                 />
                 <Setting
                     title="Look Ahead"

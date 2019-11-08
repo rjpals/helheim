@@ -3,17 +3,27 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import 'rc-slider/assets/index.css'
 import Slider from 'rc-slider'
-const { Handle } = Slider
+const { Handle, Range } = Slider
 
 class Setting extends React.Component {
     render() {
-        const display = this.props.value.toLocaleString()
+        console.log(this.props.value)
+        const isRange = Array.isArray(this.props.value)
+
+        const display = isRange?
+            `[${this.props.value[0].toLocaleString()}, ${this.props.value[1].toLocaleString()}]` :
+            this.props.value.toLocaleString()
+
+        const ComponentType = isRange?
+            Range :
+            Slider
+
         return <div>
             <h3> {this.props.title} </h3>
             <p> {this.props.desc} </p>
             <div style={{textAlign: 'center'}}>
                 { display }
-                <Slider
+                <ComponentType
                     min={this.props.min}
                     max={this.props.max}
                     value={this.props.value}
