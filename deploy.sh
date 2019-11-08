@@ -27,4 +27,24 @@ for LIB in ${LIBS[@]}; do
     fi
 done
 
+#STAGED=$(git diff)
+#UNSTAGED=$(git diff --cached)
+
+#echo $STAGED
+#echo $UNSTAGED
+
+#if [ -n "$STAGED" ]; then
+#    if [ -n "$UNSTAGED" ]; then
+#        echo Clean diff - commiting to build repo
+#    fi
+#fi
+
+if [[ `git status --porcelain --untracked-files=no` ]]; then
+    echo "Uncommited changes, not sending to build repo"
+else
+    echo "All changes committed, creating commit in build repo... (you must still push)"
+    HEADSHA=$(git rev-parse HEAD)
+    (cd $GITHUBPAGESFOLDER && git commit -m "Git build $HEADSHA")
+fi
+
 echo Deployment complete
