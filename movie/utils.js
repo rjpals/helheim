@@ -33,13 +33,17 @@ const getQueryParam = function(name) {
 
 const applyUrlChanges = (config) => {
     config = JSON.parse(JSON.stringify(config))
-        config.resources = config.resources.map( r => {
-        let enabled = JSON.parse(getQueryParam(r.name))
-        if(enabled != null) {
-            r.enabled = enabled
-        }
-        return r
-    })
+    const disabledResourcesString = getQueryParam('disabledResources')
+
+    if(disabledResourcesString != null) {
+        const disabledResourcesList = disabledResourcesString.split(',')
+        const disabledResourcesSet = new Set(disabledResourcesList)
+        config.resources.forEach( (res) => {
+            if(disabledResourcesSet.has(res.name)) {
+                res.enabled = false
+            }
+        })
+    }
 
     const v = config.viewer.view
 

@@ -85,9 +85,8 @@ class Movie extends React.Component {
             dirY: dir.y,
             dirZ: dir.z,
         }
-        this.props.config.resources.forEach( (res, index) => {
-            obj[res.name] = this.state.enabledPCs[index]
-        })
+        obj.disabledResources = this.props.config.resources.filter( (res, index) => !this.state.enabledPCs[index]).map(res => res.name).join(',')
+
         const encode = (o) => Object.keys(o).map( k => `${k}=${o[k]}`).join('&')
         const l = window.location
         const link = `${l.origin}${l.pathname}?${encode(obj)}`
