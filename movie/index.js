@@ -278,7 +278,7 @@ class Movie extends React.Component {
 
     render() {
         const exportButton = <button onClick={ this.dumpState.bind(this) } >
-                Export
+                Dump state
             </button>
 
         const pauseButton = <button onClick={ this.togglePause.bind(this) } >
@@ -320,7 +320,7 @@ class Movie extends React.Component {
         const sidebar = <Sidebar>
             <h1 style={{textAlign: "center"}}> Helheim </h1>
             {pauseButton}
-            {exportButton}
+            {this.props.config.debug? exportButton : null}
             {shareButton}
             <Dropdown title="Tools">
                 {this.state.hasBox? delCubeButton : addCubeButton}
