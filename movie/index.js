@@ -420,8 +420,25 @@ if(Utils.isWebGL2Available()) {
     const viewer = new Potree.Viewer(potreeContainer, {useDefaultRenderLoop: true})
     window.viewer = viewer
 
-    const movie = <Movie config={Utils.applyUrlChanges(DefaultConfig)} viewer={viewer}/>
-    ReactDom.render(movie,  domContainer)
+    const useDefaultConfig = (data) => {
+        console.log("Error loading config.json, reverting to default")
+        console.log(data.statusText)
+        const movie = <Movie
+            config={Utils.applyUrlChanges(DefaultConfig)}
+            viewer={viewer}/>
+        ReactDom.render(movie,  domContainer)
+    }
+
+    const useCustomConfig = (config) => {
+        const movie = <Movie
+            config={Utils.applyUrlChanges(config)}
+            viewer={viewer}/>
+        ReactDom.render(movie,  domContainer)
+    }
+
+    $.getJSON('./config.json', useCustomConfig)
+        .fail(useDefaultConfig)
+
 } else { 
     ReactDom.render(badBrowserPage,  domContainer)
 }

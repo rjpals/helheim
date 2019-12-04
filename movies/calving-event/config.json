@@ -1,0 +1,91 @@
+{
+    "movie": {},
+    "viewer": {
+        "pointBudget": 1000000,
+        "background": "white",
+        "view": {
+            "position": [
+                547304.10,
+                7362457.65,
+                8253.22
+
+            ],
+            "lookAt": [
+                536782.43,
+                7361290.80,
+                140.21
+            ]
+        }
+    },
+    "material": {
+        "size": 3,
+        "pointSizeType": 0,
+        "pointColorType": 3,
+        "elevationRange": [
+            42,
+            177
+        ]
+    },
+    "resourceMeta": {
+        "devPrefix": "https://grid-public-ept.s3.amazonaws.com/atlas/ATLAS-North/2018/",
+        "prodPrefix": "https://grid-public-ept.s3.amazonaws.com/atlas/ATLAS-North/2018/"
+    },
+    "resources": [
+        {
+            "name": "180811_120230",
+            "psid": 110,
+            "enabled": true
+        },
+        {
+            "name": "180811_180231",
+            "psid": 112,
+            "enabled": true
+        },
+        {
+            "name": "180812_000231",
+            "psid": 114,
+            "enabled": true
+        },
+        {
+            "name": "180812_060253",
+            "psid": 116,
+            "enabled": true
+        },
+        {
+            "name": "180812_120215",
+            "psid": 118,
+            "enabled": true
+        },
+        {
+            "name": "180812_180240",
+            "psid": 120,
+            "enabled": true
+        },
+        {
+            "name": "180813_000244",
+            "psid": 122,
+            "enabled": true
+        },
+        {
+            "name": "180813_060236",
+            "psid": 124,
+            "enabled": true
+        },
+        {
+            "name": "180813_120239",
+            "psid": 126,
+            "enabled": true
+        },
+        {
+            "name": "180814_000226",
+            "psid": 129,
+            "enabled": true
+        },
+        {
+            "name": "180814_120224",
+            "psid": 132,
+            "enabled": true
+        }
+    ]
+}
+

@@ -1,0 +1,1056 @@
+{
+    "movie": {},
+    "viewer": {
+        "pointBudget": 1000000,
+        "background": "gradient",
+        "view": {
+            "position": [
+                547304.10,
+                7362457.65,
+                8253.22
+
+            ],
+            "lookAt": [
+                536782.43,
+                7361290.80,
+                140.21
+            ]
+        }
+    },
+    "material": {
+        "size": 3,
+        "pointSizeType": 0,
+        "pointColorType": 3,
+        "elevationRange": [
+            0,
+            180
+        ]
+    },
+    "resourceMeta": {
+        "devPrefix": "https://grid-public-ept.s3.amazonaws.com/atlas/ATLAS-North/2018/",
+        "prodPrefix": "https://grid-public-ept.s3.amazonaws.com/atlas/ATLAS-North/2018/"
+    },
+    "resources": [
+        {
+            "name": "180731_110237",
+            "psid": 24,
+            "enabled": true
+        },
+        {
+            "name": "180731_160226",
+            "psid": 26,
+            "enabled": true
+        },
+        {
+            "name": "180731_180304",
+            "psid": 27,
+            "enabled": true
+        },
+        {
+            "name": "180731_200243",
+            "psid": 29,
+            "enabled": true
+        },
+        {
+            "name": "180731_220250",
+            "psid": 30,
+            "enabled": true
+        },
+        {
+            "name": "180801_104933",
+            "psid": 33,
+            "enabled": true
+        },
+        {
+            "name": "180801_120216",
+            "psid": 34,
+            "enabled": true
+        },
+        {
+            "name": "180801_180231",
+            "psid": 36,
+            "enabled": true
+        },
+        {
+            "name": "180802_000254",
+            "psid": 38,
+            "enabled": true
+        },
+        {
+            "name": "180802_060216",
+            "psid": 40,
+            "enabled": true
+        },
+        {
+            "name": "180802_120229",
+            "psid": 42,
+            "enabled": true
+        },
+        {
+            "name": "180802_180230",
+            "psid": 44,
+            "enabled": true
+        },
+        {
+            "name": "180803_000254",
+            "psid": 46,
+            "enabled": true
+        },
+        {
+            "name": "180803_060205",
+            "psid": 47,
+            "enabled": true
+        },
+        {
+            "name": "180803_120230",
+            "psid": 49,
+            "enabled": true
+        },
+        {
+            "name": "180803_180228",
+            "psid": 51,
+            "enabled": true
+        },
+        {
+            "name": "180804_000229",
+            "psid": 53,
+            "enabled": true
+        },
+        {
+            "name": "180804_060231",
+            "psid": 55,
+            "enabled": true
+        },
+        {
+            "name": "180804_120232",
+            "psid": 57,
+            "enabled": true
+        },
+        {
+            "name": "180804_180230",
+            "psid": 59,
+            "enabled": true
+        },
+        {
+            "name": "180805_000232",
+            "psid": 61,
+            "enabled": true
+        },
+        {
+            "name": "180805_060239",
+            "psid": 63,
+            "enabled": true
+        },
+        {
+            "name": "180805_120239",
+            "psid": 65,
+            "enabled": true
+        },
+        {
+            "name": "180805_180231",
+            "psid": 67,
+            "enabled": true
+        },
+        {
+            "name": "180806_060231",
+            "psid": 70,
+            "enabled": true
+        },
+        {
+            "name": "180806_120230",
+            "psid": 72,
+            "enabled": true
+        },
+        {
+            "name": "180806_180232",
+            "psid": 74,
+            "enabled": true
+        },
+        {
+            "name": "180807_000246",
+            "psid": 76,
+            "enabled": true
+        },
+        {
+            "name": "180807_060248",
+            "psid": 78,
+            "enabled": true
+        },
+        {
+            "name": "180807_120231",
+            "psid": 80,
+            "enabled": true
+        },
+        {
+            "name": "180807_180235",
+            "psid": 82,
+            "enabled": true
+        },
+        {
+            "name": "180808_000238",
+            "psid": 84,
+            "enabled": true
+        },
+        {
+            "name": "180808_060247",
+            "psid": 86,
+            "enabled": true
+        },
+        {
+            "name": "180808_120230",
+            "psid": 88,
+            "enabled": true
+        },
+        {
+            "name": "180808_180246",
+            "psid": 90,
+            "enabled": true
+        },
+        {
+            "name": "180809_000246",
+            "psid": 92,
+            "enabled": true
+        },
+        {
+            "name": "180809_060240",
+            "psid": 94,
+            "enabled": true
+        },
+        {
+            "name": "180809_120231",
+            "psid": 96,
+            "enabled": true
+        },
+        {
+            "name": "180809_180230",
+            "psid": 98,
+            "enabled": true
+        },
+        {
+            "name": "180810_000238",
+            "psid": 100,
+            "enabled": true
+        },
+        {
+            "name": "180810_060236",
+            "psid": 102,
+            "enabled": true
+        },
+        {
+            "name": "180810_180234",
+            "psid": 105,
+            "enabled": true
+        },
+        {
+            "name": "180811_000249",
+            "psid": 106,
+            "enabled": true
+        },
+        {
+            "name": "180811_060214",
+            "psid": 108,
+            "enabled": true
+        },
+        {
+            "name": "180811_120230",
+            "psid": 110,
+            "enabled": true
+        },
+        {
+            "name": "180811_180231",
+            "psid": 112,
+            "enabled": true
+        },
+        {
+            "name": "180812_000231",
+            "psid": 114,
+            "enabled": true
+        },
+        {
+            "name": "180812_060253",
+            "psid": 116,
+            "enabled": true
+        },
+        {
+            "name": "180812_120215",
+            "psid": 118,
+            "enabled": true
+        },
+        {
+            "name": "180812_180240",
+            "psid": 120,
+            "enabled": true
+        },
+        {
+            "name": "180813_000244",
+            "psid": 122,
+            "enabled": true
+        },
+        {
+            "name": "180813_060236",
+            "psid": 124,
+            "enabled": true
+        },
+        {
+            "name": "180813_120239",
+            "psid": 126,
+            "enabled": true
+        },
+        {
+            "name": "180814_000226",
+            "psid": 129,
+            "enabled": true
+        },
+        {
+            "name": "180814_120224",
+            "psid": 132,
+            "enabled": true
+        },
+        {
+            "name": "180815_000239",
+            "psid": 135,
+            "enabled": true
+        },
+        {
+            "name": "180815_060247",
+            "psid": 137,
+            "enabled": true
+        },
+        {
+            "name": "180815_120228",
+            "psid": 139,
+            "enabled": true
+        },
+        {
+            "name": "180816_000231",
+            "psid": 142,
+            "enabled": true
+        },
+        {
+            "name": "180816_060259",
+            "psid": 144,
+            "enabled": true
+        },
+        {
+            "name": "180816_120206",
+            "psid": 146,
+            "enabled": true
+        },
+        {
+            "name": "180816_180231",
+            "psid": 148,
+            "enabled": true
+        },
+        {
+            "name": "180817_000238",
+            "psid": 150,
+            "enabled": true
+        },
+        {
+            "name": "180817_060248",
+            "psid": 152,
+            "enabled": true
+        },
+        {
+            "name": "180817_120230",
+            "psid": 154,
+            "enabled": true
+        },
+        {
+            "name": "180817_180249",
+            "psid": 156,
+            "enabled": true
+        },
+        {
+            "name": "180818_000223",
+            "psid": 158,
+            "enabled": true
+        },
+        {
+            "name": "180818_060239",
+            "psid": 160,
+            "enabled": true
+        },
+        {
+            "name": "180818_120231",
+            "psid": 162,
+            "enabled": true
+        },
+        {
+            "name": "180818_180231",
+            "psid": 163,
+            "enabled": true
+        },
+        {
+            "name": "180819_000239",
+            "psid": 165,
+            "enabled": true
+        },
+        {
+            "name": "180819_060239",
+            "psid": 167,
+            "enabled": true
+        },
+        {
+            "name": "180819_120231",
+            "psid": 169,
+            "enabled": true
+        },
+        {
+            "name": "180819_180231",
+            "psid": 171,
+            "enabled": true
+        },
+        {
+            "name": "180820_000247",
+            "psid": 173,
+            "enabled": true
+        },
+        {
+            "name": "180820_060258",
+            "psid": 175,
+            "enabled": true
+        },
+        {
+            "name": "180820_120214",
+            "psid": 177,
+            "enabled": true
+        },
+        {
+            "name": "180820_180236",
+            "psid": 179,
+            "enabled": true
+        },
+        {
+            "name": "180821_000237",
+            "psid": 181,
+            "enabled": true
+        },
+        {
+            "name": "180821_120233",
+            "psid": 184,
+            "enabled": true
+        },
+        {
+            "name": "180821_180230",
+            "psid": 186,
+            "enabled": true
+        },
+        {
+            "name": "180822_000256",
+            "psid": 188,
+            "enabled": true
+        },
+        {
+            "name": "180822_060217",
+            "psid": 190,
+            "enabled": true
+        },
+        {
+            "name": "180822_120231",
+            "psid": 192,
+            "enabled": true
+        },
+        {
+            "name": "180822_180236",
+            "psid": 194,
+            "enabled": true
+        },
+        {
+            "name": "180823_000239",
+            "psid": 196,
+            "enabled": true
+        },
+        {
+            "name": "180823_060239",
+            "psid": 198,
+            "enabled": true
+        },
+        {
+            "name": "180823_120230",
+            "psid": 200,
+            "enabled": true
+        },
+        {
+            "name": "180823_180231",
+            "psid": 202,
+            "enabled": true
+        },
+        {
+            "name": "180824_000236",
+            "psid": 204,
+            "enabled": true
+        },
+        {
+            "name": "180824_060257",
+            "psid": 206,
+            "enabled": true
+        },
+        {
+            "name": "180824_120232",
+            "psid": 208,
+            "enabled": true
+        },
+        {
+            "name": "180824_180303",
+            "psid": 210,
+            "enabled": true
+        },
+        {
+            "name": "180825_000223",
+            "psid": 212,
+            "enabled": true
+        },
+        {
+            "name": "180825_060239",
+            "psid": 214,
+            "enabled": true
+        },
+        {
+            "name": "180825_120245",
+            "psid": 216,
+            "enabled": true
+        },
+        {
+            "name": "180825_180237",
+            "psid": 218,
+            "enabled": true
+        },
+        {
+            "name": "180826_000253",
+            "psid": 220,
+            "enabled": true
+        },
+        {
+            "name": "180826_060246",
+            "psid": 222,
+            "enabled": true
+        },
+        {
+            "name": "180826_120232",
+            "psid": 223,
+            "enabled": true
+        },
+        {
+            "name": "180827_000301",
+            "psid": 226,
+            "enabled": true
+        },
+        {
+            "name": "180827_060216",
+            "psid": 228,
+            "enabled": true
+        },
+        {
+            "name": "180827_120235",
+            "psid": 230,
+            "enabled": true
+        },
+        {
+            "name": "180827_180243",
+            "psid": 232,
+            "enabled": true
+        },
+        {
+            "name": "180828_000307",
+            "psid": 234,
+            "enabled": true
+        },
+        {
+            "name": "180828_060314",
+            "psid": 236,
+            "enabled": true
+        },
+        {
+            "name": "180828_120249",
+            "psid": 238,
+            "enabled": true
+        },
+        {
+            "name": "180828_180216",
+            "psid": 240,
+            "enabled": true
+        },
+        {
+            "name": "180829_000248",
+            "psid": 242,
+            "enabled": true
+        },
+        {
+            "name": "180829_180232",
+            "psid": 246,
+            "enabled": true
+        },
+        {
+            "name": "180830_000252",
+            "psid": 248,
+            "enabled": true
+        },
+        {
+            "name": "180830_060257",
+            "psid": 250,
+            "enabled": true
+        },
+        {
+            "name": "180830_120239",
+            "psid": 252,
+            "enabled": true
+        },
+        {
+            "name": "180831_000248",
+            "psid": 256,
+            "enabled": true
+        },
+        {
+            "name": "180831_060234",
+            "psid": 258,
+            "enabled": true
+        },
+        {
+            "name": "180831_120237",
+            "psid": 260,
+            "enabled": true
+        },
+        {
+            "name": "180831_180236",
+            "psid": 262,
+            "enabled": true
+        },
+        {
+            "name": "180901_000303",
+            "psid": 264,
+            "enabled": true
+        },
+        {
+            "name": "180901_060221",
+            "psid": 266,
+            "enabled": true
+        },
+        {
+            "name": "180901_180233",
+            "psid": 270,
+            "enabled": true
+        },
+        {
+            "name": "180902_000241",
+            "psid": 272,
+            "enabled": true
+        },
+        {
+            "name": "180902_060246",
+            "psid": 274,
+            "enabled": true
+        },
+        {
+            "name": "180902_120256",
+            "psid": 276,
+            "enabled": true
+        },
+        {
+            "name": "180902_180212",
+            "psid": 278,
+            "enabled": true
+        },
+        {
+            "name": "180903_000240",
+            "psid": 280,
+            "enabled": true
+        },
+        {
+            "name": "180903_060241",
+            "psid": 281,
+            "enabled": true
+        },
+        {
+            "name": "180903_120233",
+            "psid": 283,
+            "enabled": true
+        },
+        {
+            "name": "180903_180236",
+            "psid": 285,
+            "enabled": true
+        },
+        {
+            "name": "180904_000240",
+            "psid": 287,
+            "enabled": true
+        },
+        {
+            "name": "180904_060257",
+            "psid": 289,
+            "enabled": true
+        },
+        {
+            "name": "180904_120240",
+            "psid": 291,
+            "enabled": true
+        },
+        {
+            "name": "180904_180231",
+            "psid": 293,
+            "enabled": true
+        },
+        {
+            "name": "180905_000234",
+            "psid": 295,
+            "enabled": true
+        },
+        {
+            "name": "180905_060236",
+            "psid": 297,
+            "enabled": true
+        },
+        {
+            "name": "180905_120240",
+            "psid": 299,
+            "enabled": true
+        },
+        {
+            "name": "180905_180236",
+            "psid": 301,
+            "enabled": true
+        },
+        {
+            "name": "180906_060230",
+            "psid": 304,
+            "enabled": true
+        },
+        {
+            "name": "180906_120304",
+            "psid": 306,
+            "enabled": true
+        },
+        {
+            "name": "180906_180225",
+            "psid": 308,
+            "enabled": true
+        },
+        {
+            "name": "180907_000238",
+            "psid": 310,
+            "enabled": true
+        },
+        {
+            "name": "180907_060247",
+            "psid": 312,
+            "enabled": true
+        },
+        {
+            "name": "180907_120234",
+            "psid": 314,
+            "enabled": true
+        },
+        {
+            "name": "180907_180235",
+            "psid": 316,
+            "enabled": true
+        },
+        {
+            "name": "180908_000254",
+            "psid": 318,
+            "enabled": true
+        },
+        {
+            "name": "180908_060239",
+            "psid": 320,
+            "enabled": true
+        },
+        {
+            "name": "180908_120214",
+            "psid": 322,
+            "enabled": true
+        },
+        {
+            "name": "180908_180231",
+            "psid": 324,
+            "enabled": true
+        },
+        {
+            "name": "180909_000233",
+            "psid": 326,
+            "enabled": true
+        },
+        {
+            "name": "180909_060237",
+            "psid": 328,
+            "enabled": true
+        },
+        {
+            "name": "180909_120233",
+            "psid": 330,
+            "enabled": true
+        },
+        {
+            "name": "180909_180235",
+            "psid": 332,
+            "enabled": true
+        },
+        {
+            "name": "180910_000235",
+            "psid": 334,
+            "enabled": true
+        },
+        {
+            "name": "180910_180227",
+            "psid": 339,
+            "enabled": true
+        },
+        {
+            "name": "180911_060237",
+            "psid": 341,
+            "enabled": true
+        },
+        {
+            "name": "180911_120301",
+            "psid": 343,
+            "enabled": true
+        },
+        {
+            "name": "180911_180218",
+            "psid": 345,
+            "enabled": true
+        },
+        {
+            "name": "180912_000238",
+            "psid": 347,
+            "enabled": true
+        },
+        {
+            "name": "180912_060236",
+            "psid": 349,
+            "enabled": true
+        },
+        {
+            "name": "180912_120231",
+            "psid": 351,
+            "enabled": true
+        },
+        {
+            "name": "180912_180234",
+            "psid": 353,
+            "enabled": true
+        },
+        {
+            "name": "180913_000235",
+            "psid": 355,
+            "enabled": true
+        },
+        {
+            "name": "180913_060256",
+            "psid": 357,
+            "enabled": true
+        },
+        {
+            "name": "180913_120207",
+            "psid": 359,
+            "enabled": true
+        },
+        {
+            "name": "180913_180257",
+            "psid": 361,
+            "enabled": true
+        },
+        {
+            "name": "180914_000215",
+            "psid": 363,
+            "enabled": true
+        },
+        {
+            "name": "180914_120241",
+            "psid": 366,
+            "enabled": true
+        },
+        {
+            "name": "180914_180234",
+            "psid": 368,
+            "enabled": true
+        },
+        {
+            "name": "180915_000238",
+            "psid": 370,
+            "enabled": true
+        },
+        {
+            "name": "180915_060241",
+            "psid": 372,
+            "enabled": true
+        },
+        {
+            "name": "180915_180253",
+            "psid": 375,
+            "enabled": true
+        },
+        {
+            "name": "180916_000229",
+            "psid": 377,
+            "enabled": true
+        },
+        {
+            "name": "180916_060309",
+            "psid": 379,
+            "enabled": true
+        },
+        {
+            "name": "180916_120238",
+            "psid": 381,
+            "enabled": true
+        },
+        {
+            "name": "180916_180238",
+            "psid": 383,
+            "enabled": true
+        },
+        {
+            "name": "180917_000242",
+            "psid": 385,
+            "enabled": true
+        },
+        {
+            "name": "180917_060247",
+            "psid": 387,
+            "enabled": true
+        },
+        {
+            "name": "180917_120235",
+            "psid": 389,
+            "enabled": true
+        },
+        {
+            "name": "180917_180231",
+            "psid": 391,
+            "enabled": true
+        },
+        {
+            "name": "180918_000236",
+            "psid": 393,
+            "enabled": true
+        },
+        {
+            "name": "180918_060238",
+            "psid": 395,
+            "enabled": true
+        },
+        {
+            "name": "180918_120230",
+            "psid": 397,
+            "enabled": true
+        },
+        {
+            "name": "180918_180243",
+            "psid": 399,
+            "enabled": true
+        },
+        {
+            "name": "180919_000248",
+            "psid": 400,
+            "enabled": true
+        },
+        {
+            "name": "180919_120249",
+            "psid": 403,
+            "enabled": true
+        },
+        {
+            "name": "180919_180213",
+            "psid": 405,
+            "enabled": true
+        },
+        {
+            "name": "180920_180236",
+            "psid": 410,
+            "enabled": true
+        },
+        {
+            "name": "180921_060415",
+            "psid": 413,
+            "enabled": true
+        },
+        {
+            "name": "180922_000357",
+            "psid": 417,
+            "enabled": true
+        },
+        {
+            "name": "180922_060351",
+            "psid": 419,
+            "enabled": true
+        },
+        {
+            "name": "180922_120231",
+            "psid": 421,
+            "enabled": true
+        },
+        {
+            "name": "180922_180246",
+            "psid": 423,
+            "enabled": true
+        },
+        {
+            "name": "180923_180314",
+            "psid": 428,
+            "enabled": true
+        },
+        {
+            "name": "180924_000252",
+            "psid": 430,
+            "enabled": true
+        },
+        {
+            "name": "180924_120319",
+            "psid": 432,
+            "enabled": true
+        },
+        {
+            "name": "180924_180243",
+            "psid": 434,
+            "enabled": true
+        },
+        {
+            "name": "180925_120256",
+            "psid": 438,
+            "enabled": true
+        },
+        {
+            "name": "180925_180215",
+            "psid": 440,
+            "enabled": true
+        },
+        {
+            "name": "180926_120237",
+            "psid": 444,
+            "enabled": true
+        },
+        {
+            "name": "180926_180239",
+            "psid": 445,
+            "enabled": true
+        },
+        {
+            "name": "180927_120248",
+            "psid": 449,
+            "enabled": true
+        },
+        {
+            "name": "180927_180300",
+            "psid": 451,
+            "enabled": true
+        },
+        {
+            "name": "180928_060526",
+            "psid": 453,
+            "enabled": true
+        },
+        {
+            "name": "180928_120258",
+            "psid": 454,
+            "enabled": true
+        },
+        {
+            "name": "180928_180240",
+            "psid": 456,
+            "enabled": true
+        }
+    ]
+}
+
