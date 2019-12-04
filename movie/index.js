@@ -189,6 +189,8 @@ class Movie extends React.Component {
         viewer.setFilterGPSTimeRange(-Infinity, Infinity)
         if(!this.state.paused) {
             this.advancePC()
+            const pc = this.props.config.resources[this.state.activePC]
+            this.viewer.setDescription(Utils.toIso(pc.name).toLocaleString())
             this.updateVisiblePCs()
         }
     }
