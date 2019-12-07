@@ -17,7 +17,7 @@ for FILE in ${FILES[@]}; do
 done
 
 for LIB in ${LIBS[@]}; do
-    cp -r ./$LIB $GITHUBPAGESFOLDER
+    cp -r ./$LIB $GITHUBPAGESFOLDER/movie
     list=$(aws s3 ls s3://$BUCKET/$LIB/)
     if [ -z "$list" ]
     then
