@@ -18,7 +18,8 @@ const fps = (lastFrame, lastTime) => {
     setTimeout(() => fps(f, d), 1000)
 }
 
-function toIso (t) {
+function toIso (name) {
+    const t = name.slice(-13)
     const s = (i) => t.slice(i,i+2)
     return `20${s(0)}-${s(2)}-${s(4)}T${s(7)}:${s(9)}:${s(11)}Z`
 }

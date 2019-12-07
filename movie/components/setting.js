@@ -7,7 +7,6 @@ const { Handle, Range } = Slider
 
 class Setting extends React.Component {
     render() {
-        console.log(this.props.value)
         const isRange = Array.isArray(this.props.value)
 
         const display = isRange?

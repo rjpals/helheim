@@ -37,7 +37,7 @@ class Movie extends React.Component {
             activePC: 0,
             speed: 1,
             pointBudget,
-            preload: 5,
+            preload: config.defaultPreload || 5,
             visiblePCs,
             enabledPCs,
             elevationRange: config.material.elevationRange,
